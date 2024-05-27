@@ -37,10 +37,36 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CheckDuLieu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="KetNoi.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NodeTaiKhoanQuanTri.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TaiKhoanQuanTri.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="QuanLyBanXe.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CheckDuLieu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="KetNoi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeTaiKhoanQuanTri.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TaiKhoanQuanTri.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
