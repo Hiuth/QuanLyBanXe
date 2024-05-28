@@ -9,6 +9,7 @@ private:
 public:
 	TaiKhoanQuanTri();
 	virtual ~TaiKhoanQuanTri();
+	void DangNhap();
 
 	void NhapDuLieuTaiKhoanQuanTri();
 	void NhapDuLieuTaiKhoanKhachHang();
@@ -25,7 +26,8 @@ public:
 	void SuaTaiKhoanKhachHang(string,string,string);
 	void SuaThongTinKhachHang(string,string,string);
 
-	void InputSearch();
+	void InputSearchManager();
+	void InputSearchUser();
 	vector<NodeTaiKhoanQuanTri>TimKiemTaiKhoanQuanTri(string);
 	vector<NodeTaiKhoanKhachHang> TimKiemTaiKhoanKhachHang(string);
 	vector<NodeTaiKhoanKhachHang> TimKiemThongTinKhachHang();

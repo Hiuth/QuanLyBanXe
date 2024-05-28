@@ -18,6 +18,19 @@ TaiKhoanQuanTri::~TaiKhoanQuanTri()
 
 }
 
+void TaiKhoanQuanTri::DangNhap()
+{
+    string email, pass;
+    cout << "Nhap Email Tai Khoan: "; cin >> email;
+    cout << "Nhap Mat Khau: "; cin >> pass;
+    if (DL->CheckManagerAccount(email, pass)) {
+        cout << "Chao mung tro lai!" << endl;
+    }
+    else {
+        cout << "Email hoac mat khau sai! Vui long kiem tra lai." << endl;
+    }
+}
+
 void TaiKhoanQuanTri::NhapDuLieuTaiKhoanQuanTri()
 {
     int n;
@@ -256,12 +269,30 @@ void TaiKhoanQuanTri::SuaThongTinKhachHang(string, string, string)
 
 }
 
-void TaiKhoanQuanTri::InputSearch()
+void TaiKhoanQuanTri::InputSearchManager()
 {
     string Email;
     cout << "Nhap Email tai khoan quan tri can tim: "; cin >> Email;
-    cout << Email;
-    QT->PrintQT(TimKiemTaiKhoanQuanTri(Email));
+    if (DL->CheckTKQT(Email)) {
+        QT->PrintQT(TimKiemTaiKhoanQuanTri(Email));
+    }
+    else {
+        cout << "Email khong dung hoac tai khoan khong ton tai! Vui long nhap lai." << endl;
+    }
+
+}
+
+void TaiKhoanQuanTri::InputSearchUser()
+{
+    string Email;
+    cout << "Nhap Email tai khoan quan tri can tim: "; cin >> Email;
+    if (DL->CheckTKKH(Email)) {
+        QT->PrintTKKH(TimKiemTaiKhoanKhachHang(Email));
+    }
+    else {
+        cout << "Email khong dung hoac tai khoan khong ton tai! Vui long nhap lai." << endl;
+    }
+    cout << endl;
 }
 
 vector<NodeTaiKhoanQuanTri> TaiKhoanQuanTri::TimKiemTaiKhoanQuanTri(string Email)
