@@ -9,5 +9,7 @@ public:
 	bool checkName(string, string);
 	bool checkSytax(string);
 	bool checkbirthDay(string);
+	bool CheckTKQT(string);
+	bool CheckTKKH(string);
 };
 
