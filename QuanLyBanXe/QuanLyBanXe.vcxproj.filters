@@ -52,9 +52,6 @@
     <ClCompile Include="NodeTaiKhoanKhachHang.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TaiKhoanKhachHang.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="QuanLyBanXe.h">
@@ -75,9 +72,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="NodeTaiKhoanKhachHang.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TaiKhoanKhachHang.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -106,6 +106,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="NodeTaiKhoanKhachHang.cpp" />
     <ClCompile Include="TaiKhoanQuanTri.cpp" />
     <QtRcc Include="QuanLyBanXe.qrc" />
     <QtUic Include="QuanLyBanXe.ui" />
@@ -119,6 +120,7 @@
   <ItemGroup>
     <ClInclude Include="CheckDuLieu.h" />
     <ClInclude Include="KetNoi.h" />
+    <ClInclude Include="NodeTaiKhoanKhachHang.h" />
     <ClInclude Include="NodeTaiKhoanQuanTri.h" />
     <ClInclude Include="TaiKhoanQuanTri.h" />
   </ItemGroup>
