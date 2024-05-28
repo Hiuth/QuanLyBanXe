@@ -2,6 +2,8 @@
 #include "KetNoi.h"
 KetNoi* Check_TaiKhoanQuanTri = new KetNoi();
 Connection* Check_tk = Check_TaiKhoanQuanTri->CheckDatabase();
+NodeTaiKhoanQuanTri* TKQT;
+TaiKhoanQuanTri* QT = new TaiKhoanQuanTri();
 
 TaiKhoanQuanTri::TaiKhoanQuanTri()
 {
@@ -14,19 +16,27 @@ TaiKhoanQuanTri::~TaiKhoanQuanTri()
 
 }
 
-void TaiKhoanQuanTri::NhapDuLieuTaiKhoan()
+void TaiKhoanQuanTri::NhapDuLieuTaiKhoan(int n)
 {
-
+    for (int i = 0; i < n; i++) {
+        string Email, TenTaiKhoan, MatKhau;
+        cout << "Nhap Email: "; cin >> Email;
+        cout << "Nhap Ten Tai Khoan: "; cin >> TenTaiKhoan;
+        cout << "Nhap Mat Khau: "; cin >> MatKhau;
+        TKQT = new NodeTaiKhoanQuanTri(Email, TenTaiKhoan, MatKhau);
+        QT->TaoTaiKhoanQuanTri(TKQT);
+        cout << endl;
+    }
 }
 
-void TaiKhoanQuanTri::TaoTaiKhoanQuanTri()
+void TaiKhoanQuanTri::TaoTaiKhoanQuanTri(NodeTaiKhoanQuanTri* p)
 {
     try {
-        NodeTaiKhoanQuanTri* p;
+       
         Statement* stmt;
         stmt = Check_tk->createStatement();
         //kiem tra su ton tai cua bang
-        string TenBang = "TaiKhoan";
+        string TenBang = "ManagerAccount";
         string KiemTra = "show tables like'" + TenBang + "'";
         ResultSet* result = stmt->executeQuery(KiemTra);
         if (result->next() == true) { //nếu có bảng thì result sẽ trả về true, không có thì ngược lại
@@ -35,18 +45,23 @@ void TaiKhoanQuanTri::TaoTaiKhoanQuanTri()
             string Email;
             accountName = p->GetManagerAccountName();
             password = p->GetManagerAccountPass();
-            Email = p->ge;
-            string UpdateTableAccount = "insert into TaiKhoan Values ('" + accountName + "','" + password + "','" + admin + "', '" + HRM + "','" + FM + "');";
+            Email = p->GetManagerAccountEmail();
+            string UpdateTableAccount = "insert into ManagerAccount (ManagerEmail, ManagerAccountName, ManagerPass) Values ('" + Email + "','" + accountName + "','" + password + "');";
             stmt->execute(UpdateTableAccount);
             cout << "Du lieu da duoc cap nhat!" << endl;
         }
         else {
             cout << "Vui long kiem tra lai du lieu. " << endl;
         }
+
         delete result;
         delete stmt;
         delete p;
-}
+    }
+    catch (sql::SQLException& e) {
+        cerr << "SQL Error: " << e.what() << std::endl;
+    }
+ }
 
 void TaiKhoanQuanTri::TaoTaiKhoanKhachHang()
 {
@@ -55,12 +70,20 @@ void TaiKhoanQuanTri::TaoTaiKhoanKhachHang()
 
 void TaiKhoanQuanTri::InputDelete()
 {
-
+    string xoa;
+    cout << "Ten tai khoan can xoa: "; cin >> xoa;
+    QT->XoaTaiKhoanQuanTri(xoa);
 }
 
-void TaiKhoanQuanTri::XoaTaiKhoanQuanTri(string)
+void TaiKhoanQuanTri::XoaTaiKhoanQuanTri(string xoa)
 {
-
+    Statement* stmt;
+    stmt = Check_tk->createStatement();
+    string SelectData = "Delete from ManagerAccount where ManagerEmail = '" + xoa + "'";
+    int rows_affected = stmt->executeUpdate(SelectData);
+    string call = "CALL UpdateManagerIDs();";
+    stmt->execute(call);
+    delete stmt;
 }
 
 void TaiKhoanQuanTri::XoaTaiKhoanKhachHang(string)
@@ -73,17 +96,25 @@ void TaiKhoanQuanTri::InputEdit()
 
 }
 
-void TaiKhoanQuanTri::SuaTaiKhoanQuanTri(string)
+void TaiKhoanQuanTri::SuaTaiKhoanQuanTri(string ChoCanSua,string MuonDoiThanh, string Email)
 {
-
+    Statement* stmt;
+    stmt = Check_tk->createStatement();
+    string SelectData= "UPDATE ManagerAccount SET " + ChoCanSua + " = '" + MuonDoiThanh + "' WHERE ManagerEmail = '" + Email + "'";
+    int rows_affected = stmt->executeUpdate(SelectData);
+    delete stmt;
 }
 
-void TaiKhoanQuanTri::SuaTaiKhoanKhachHang(string)
+void TaiKhoanQuanTri::SuaTaiKhoanKhachHang(string ChoCanSua, string MuonDoiThanh, string Email)
 {
-
+    Statement* stmt;
+    stmt = Check_tk->createStatement();
+    string SelectData = "UPDATE UserAccount SET " + ChoCanSua + " = '" + MuonDoiThanh + "' WHERE UserEmail = '" + Email + "'";
+    int rows_affected = stmt->executeUpdate(SelectData);
+    delete stmt;
 }
 
-void TaiKhoanQuanTri::SuaThongTinKhachHang(string)
+void TaiKhoanQuanTri::SuaThongTinKhachHang(string, string, string)
 {
 
 }
@@ -93,17 +124,28 @@ void TaiKhoanQuanTri::InputSearch()
 
 }
 
-void TaiKhoanQuanTri::TimKiemTaiKhoanQuanTri(string)
+vector<NodeTaiKhoanQuanTri> TaiKhoanQuanTri::TimKiemTaiKhoanQuanTri(string Email)
+{
+    vector<NodeTaiKhoanQuanTri> ManagerAccountSearch;
+    Statement* stmt;
+    stmt = Check_tk->createStatement();
+    string SelectData = "Select *from ManagerAccount where ManagerEmail = '" + Email + "'";
+    ResultSet* res = stmt->executeQuery(SelectData);
+    while (res->next()) {
+        NodeTaiKhoanQuanTri account(res->getString("ManagerAccountID"), res->getString("ManagerEmail"), res->getString("MangerAccountName"), res->getString("ManagerAccountPass"));
+        ManagerAccountSearch.push_back(account);
+    }
+    delete stmt;
+    delete res;
+   return ManagerAccountSearch;
+}
+
+vector<NodeTaiKhoanQuanTri> TaiKhoanQuanTri::TimKiemTaiKhoanKhachHang(string)
 {
 
 }
 
-void TaiKhoanQuanTri::TimKiemTaiKhoanKhachHang(string)
-{
-
-}
-
-void TaiKhoanQuanTri::TimKiemThongTinKhachHang()
+vector<NodeTaiKhoanQuanTri> TaiKhoanQuanTri::TimKiemThongTinKhachHang()
 {
 
 }

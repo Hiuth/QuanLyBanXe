@@ -9,8 +9,8 @@ public:
 	TaiKhoanQuanTri();
 	virtual ~TaiKhoanQuanTri();
 
-	void NhapDuLieuTaiKhoan();
-	void TaoTaiKhoanQuanTri();
+	void NhapDuLieuTaiKhoan(int);
+	void TaoTaiKhoanQuanTri(NodeTaiKhoanQuanTri*);
 	void TaoTaiKhoanKhachHang();
 
 	void InputDelete();
@@ -18,14 +18,14 @@ public:
 	void XoaTaiKhoanKhachHang(string);
 	
 	void InputEdit();
-	void SuaTaiKhoanQuanTri(string);
-	void SuaTaiKhoanKhachHang(string);
-	void SuaThongTinKhachHang(string);
+	void SuaTaiKhoanQuanTri(string, string, string);
+	void SuaTaiKhoanKhachHang(string,string,string);
+	void SuaThongTinKhachHang(string,string,string);
 
 	void InputSearch();
-	void TimKiemTaiKhoanQuanTri(string);
-	void TimKiemTaiKhoanKhachHang(string);
-	void TimKiemThongTinKhachHang();
+	vector<NodeTaiKhoanQuanTri>TimKiemTaiKhoanQuanTri(string);
+	vector<NodeTaiKhoanQuanTri> TimKiemTaiKhoanKhachHang(string);
+	vector<NodeTaiKhoanQuanTri> TimKiemThongTinKhachHang();
 
 	vector<NodeTaiKhoanQuanTri> XemTatCaTaiKhoanQuanTri();
 	vector<NodeTaiKhoanQuanTri> XemTatCaTaiKhoanKhachHang();
