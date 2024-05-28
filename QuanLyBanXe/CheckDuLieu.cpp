@@ -56,6 +56,34 @@ bool CheckDuLieu::CheckTKKH(string Email)
     delete stmt;
 }
 
+bool CheckDuLieu::CheckManagerAccount(string Email, string Pass)
+{
+    Statement* stmt;
+    stmt = Check_DL->createStatement();
+    string SelectData = "Select *from ManagerAccount where ManagerEmail = '" + Email + "' AND ManagerPass = '" + Pass + "' ";
+    ResultSet* res = stmt->executeQuery(SelectData);
+    while (res->next()) {
+        return true;
+    }
+    return false;
+    delete res;
+    delete stmt;
+}
+
+bool CheckDuLieu::CheckUserAccount(string Email, string Pass)
+{
+    Statement* stmt;
+    stmt = Check_DL->createStatement();
+    string SelectData = "Select *from UserAccount where UserEmail = '" + Email + "' AND UserPass = '" + Pass + "' ";
+    ResultSet* res = stmt->executeQuery(SelectData);
+    while (res->next()) {
+        return true;
+    }
+    return false;
+    delete res;
+    delete stmt;
+}
+
 bool CheckDuLieu::checkSytax(string Pass)
 {
     for (char c : Pass) {
