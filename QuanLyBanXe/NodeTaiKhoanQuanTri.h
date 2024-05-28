@@ -11,6 +11,7 @@ private:
 	string ManagerAccountID;
 	string ManagerAccountEmail;
 public:
+	NodeTaiKhoanQuanTri( string, string,string);
 	NodeTaiKhoanQuanTri(string, string, string,string);
 	virtual ~NodeTaiKhoanQuanTri();
 	string GetManagerAccountName() { return ManagerAccountName; }
