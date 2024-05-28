@@ -82,7 +82,7 @@ void TaiKhoanQuanTri::XoaTaiKhoanQuanTri(string xoa)
     string SelectData = "Delete from ManagerAccount where ManagerEmail = '" + xoa + "'";
     int rows_affected = stmt->executeUpdate(SelectData);
     string call = "CALL UpdateManagerIDs();";
-    stmt->execute(call);
+ //   stmt->execute(call);
     delete stmt;
 }
 
@@ -121,28 +121,52 @@ void TaiKhoanQuanTri::SuaThongTinKhachHang(string, string, string)
 
 void TaiKhoanQuanTri::InputSearch()
 {
-
+    string Email;
+    cout << "Nhap Email tai khoan quan tri can tim: "; cin >> Email;
+    cout << Email;
+    QT->PrintQT(TimKiemTaiKhoanQuanTri(Email));
 }
 
 vector<NodeTaiKhoanQuanTri> TaiKhoanQuanTri::TimKiemTaiKhoanQuanTri(string Email)
 {
-    vector<NodeTaiKhoanQuanTri> ManagerAccountSearch;
-    Statement* stmt;
-    stmt = Check_tk->createStatement();
-    string SelectData = "Select *from ManagerAccount where ManagerEmail = '" + Email + "'";
-    ResultSet* res = stmt->executeQuery(SelectData);
-    while (res->next()) {
-        NodeTaiKhoanQuanTri account(res->getString("ManagerAccountID"), res->getString("ManagerEmail"), res->getString("MangerAccountName"), res->getString("ManagerAccountPass"));
-        ManagerAccountSearch.push_back(account);
+    try {
+        vector<NodeTaiKhoanQuanTri> ManagerAccountSearch;
+        Statement* stmt;
+        stmt = Check_tk->createStatement();
+        string SelectData = "Select *from ManagerAccount where ManagerEmail = '" + Email + "'";
+        ResultSet* res = stmt->executeQuery(SelectData);
+        while (res->next()) {
+            NodeTaiKhoanQuanTri account(res->getString("ManagerAccountID"), res->getString("ManagerEmail"), res->getString("ManagerAccountName"), res->getString("ManagerPass"));
+            ManagerAccountSearch.push_back(account);
+        }
+        delete stmt;
+        delete res;
+        return ManagerAccountSearch;
     }
-    delete stmt;
-    delete res;
-   return ManagerAccountSearch;
+    catch (sql::SQLException& e) {
+        cerr << "SQL Error: " << e.what() << std::endl;
+    }
 }
 
-vector<NodeTaiKhoanQuanTri> TaiKhoanQuanTri::TimKiemTaiKhoanKhachHang(string)
+vector<NodeTaiKhoanQuanTri> TaiKhoanQuanTri::TimKiemTaiKhoanKhachHang(string Email)
 {
-
+    try {
+        vector<NodeTaiKhoanQuanTri> UserAccountSearch;
+        Statement* stmt;
+        stmt = Check_tk->createStatement();
+        string SelectData = "Select *from UserAccount where UserEmail = '" + Email + "'";
+        ResultSet* res = stmt->executeQuery(SelectData);
+        while (res->next()) {
+            NodeTaiKhoanQuanTri account(res->getString("UserAccountID"), res->getString("UserEmail"), res->getString("UserAccountName"), res->getString("UserPass"));
+            UserAccountSearch.push_back(account);
+        }
+        delete stmt;
+        delete res;
+        return UserAccountSearch;
+    }
+    catch (sql::SQLException& e) {
+        cerr << "SQL Error: " << e.what() << std::endl;
+    }
 }
 
 vector<NodeTaiKhoanQuanTri> TaiKhoanQuanTri::TimKiemThongTinKhachHang()
@@ -164,3 +188,13 @@ vector<NodeTaiKhoanQuanTri> TaiKhoanQuanTri::XemTatCaThongTinKhachHang()
 {
 	return vector<NodeTaiKhoanQuanTri>();
 }
+
+void TaiKhoanQuanTri::PrintQT(vector<NodeTaiKhoanQuanTri> check)
+{
+    for (int i = 0; i < check.size(); i++) {
+        cout << check[i].GetManagerAccountID() << "\t" << check[i].GetManagerAccountEmail() << "\t" << "\t" << check[i].GetManagerAccountName() << "\t" <<check[i].GetManagerAccountPass()<< endl;
+
+    }
+}
+
+

@@ -1,5 +1,6 @@
 #pragma once
 #include"NodeTaiKhoanQuanTri.h"
+#include"NodeTaiKhoanKhachHang.h"
 class TaiKhoanQuanTri
 {
 private:
@@ -30,5 +31,8 @@ public:
 	vector<NodeTaiKhoanQuanTri> XemTatCaTaiKhoanQuanTri();
 	vector<NodeTaiKhoanQuanTri> XemTatCaTaiKhoanKhachHang();
 	vector<NodeTaiKhoanQuanTri> XemTatCaThongTinKhachHang();
+
+	void PrintQT(vector<NodeTaiKhoanQuanTri>);
+	void PrintQT(vector<NodeTaiKhoanKhachHang>);
 };
 

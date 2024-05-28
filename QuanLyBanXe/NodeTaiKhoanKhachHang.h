@@ -11,6 +11,7 @@ private:
     string CustomerAccountPass;
 public:
     NodeTaiKhoanKhachHang(string ID, string Email, string Name, string Pass);
+    NodeTaiKhoanKhachHang( string Email, string Name, string Pass);
     virtual ~NodeTaiKhoanKhachHang();
     string GetID() { return CustomerAccountID; }
     void SetID(string val) { CustomerAccountID = val; }
