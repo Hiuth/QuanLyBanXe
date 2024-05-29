@@ -9,12 +9,12 @@ private:
     string CCCD;
     string DiaChi;
     string GioiTinh;
-    string MaKhachHang;
     string SoDienThoai;
+    string Email;
     NodeKhachHang* pointer;
 
 public:
-    NodeKhachHang(string, string, string, string, string, string, string);
+    NodeKhachHang(string, string, string, string, string, string,string);
     virtual ~NodeKhachHang();
 
     string GetName() { return TenKhachHang; }
@@ -32,8 +32,8 @@ public:
     string GetIDCard() { return CCCD; }
     void SetIDCard(string val) { CCCD = val; }
 
-    string GetCustomerID() { return MaKhachHang; }
-    void SetCustomerID(string val) { MaKhachHang = val; }
+    string GetEmail() { return Email; }
+    void SetEmail(string val) { Email = val; }
 
     string GetPhoneNumber() { return SoDienThoai; }
     void SetPhoneNumber(string val) { SoDienThoai = val; }

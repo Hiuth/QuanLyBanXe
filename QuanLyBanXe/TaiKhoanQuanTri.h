@@ -1,6 +1,7 @@
 #pragma once
 #include"NodeTaiKhoanQuanTri.h"
 #include"NodeTaiKhoanKhachHang.h"
+#include"NodeKhachHang.h"
 class TaiKhoanQuanTri
 {
 private:
@@ -15,6 +16,7 @@ public:
 	void NhapDuLieuTaiKhoanKhachHang();
 	void TaoTaiKhoanQuanTri(NodeTaiKhoanQuanTri*);
 	void TaoTaiKhoanKhachHang(NodeTaiKhoanKhachHang*);
+	void ThemThongTinKhachHang(NodeKhachHang*);
 
 	void InputDelete();
 	void XoaTaiKhoanQuanTri(string);
@@ -30,13 +32,15 @@ public:
 	void InputSearchUser();
 	vector<NodeTaiKhoanQuanTri>TimKiemTaiKhoanQuanTri(string);
 	vector<NodeTaiKhoanKhachHang> TimKiemTaiKhoanKhachHang(string);
-	vector<NodeTaiKhoanKhachHang> TimKiemThongTinKhachHang();
+	vector<NodeKhachHang> TimKiemThongTinKhachHang();
 
 	vector<NodeTaiKhoanQuanTri> XemTatCaTaiKhoanQuanTri();
 	vector<NodeTaiKhoanKhachHang> XemTatCaTaiKhoanKhachHang();
-	vector<NodeTaiKhoanKhachHang> XemTatCaThongTinKhachHang();
+	vector<NodeKhachHang> XemTatCaThongTinKhachHang();
+
 
 	void PrintQT(vector<NodeTaiKhoanQuanTri>);
 	void PrintTKKH(vector<NodeTaiKhoanKhachHang>);
+	void PrintTTKH(vector<NodeKhachHang>);
 };
 

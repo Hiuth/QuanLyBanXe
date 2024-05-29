@@ -337,7 +337,7 @@ vector<NodeTaiKhoanKhachHang> TaiKhoanQuanTri::TimKiemTaiKhoanKhachHang(string E
     }
 }
 
-vector<NodeTaiKhoanKhachHang> TaiKhoanQuanTri::TimKiemThongTinKhachHang()
+vector<NodeKhachHang> TaiKhoanQuanTri::TimKiemThongTinKhachHang()
 {
 
 }
@@ -374,9 +374,20 @@ vector<NodeTaiKhoanKhachHang> TaiKhoanQuanTri::XemTatCaTaiKhoanKhachHang()
     return UserAccountSearch;
 }
 
-vector<NodeTaiKhoanKhachHang> TaiKhoanQuanTri::XemTatCaThongTinKhachHang()
+vector<NodeKhachHang> TaiKhoanQuanTri::XemTatCaThongTinKhachHang()
 {
-	
+    vector<NodeKhachHang> UserInfo;
+    Statement* stmt;
+    stmt = Check_tk->createStatement();
+    string SelectData = "Select *from KhachHang";
+    ResultSet* res = stmt->executeQuery(SelectData);
+    while (res->next()) {
+        NodeKhachHang account(res->getString("TenKH"), res->getString("NgaySinh"), res->getString("GioiTinh"), res->getString("SDT"), res->getString("SoCCCD"),res->getString("DiaChi"),res->getString("Email"));
+        UserInfo.push_back(account);
+    }
+    delete stmt;
+    delete res;
+    return UserInfo;
 }
 
 void TaiKhoanQuanTri::PrintQT(vector<NodeTaiKhoanQuanTri> check)
@@ -392,6 +403,11 @@ void TaiKhoanQuanTri::PrintTKKH(vector<NodeTaiKhoanKhachHang>check)
     for (int i = 0; i < check.size(); i++) {
         cout << check[i].GetID() << "\t" << check[i].GetEmail() << "\t" << check[i].GetName() << "\t" << check[i].GetPass() << endl;
     }
+}
+
+void TaiKhoanQuanTri::PrintTTKH(vector<NodeKhachHang>)
+{
+
 }
 
 
