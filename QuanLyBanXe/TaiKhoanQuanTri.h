@@ -14,6 +14,7 @@ public:
 
 	void NhapDuLieuTaiKhoanQuanTri();
 	void NhapDuLieuTaiKhoanKhachHang();
+	void NhapDuLieuThongTinKhachHang();
 	void TaoTaiKhoanQuanTri(NodeTaiKhoanQuanTri*);
 	void TaoTaiKhoanKhachHang(NodeTaiKhoanKhachHang*);
 	void ThemThongTinKhachHang(NodeKhachHang*);
@@ -24,15 +25,17 @@ public:
 	
 	void InputEditManager();
 	void InputEditUser();
+	void InputEditUserinfo();
 	void SuaTaiKhoanQuanTri(string, string, string);
 	void SuaTaiKhoanKhachHang(string,string,string);
 	void SuaThongTinKhachHang(string,string,string);
 
 	void InputSearchManager();
 	void InputSearchUser();
+	void InputSearchUserInfo();
 	vector<NodeTaiKhoanQuanTri>TimKiemTaiKhoanQuanTri(string);
 	vector<NodeTaiKhoanKhachHang> TimKiemTaiKhoanKhachHang(string);
-	vector<NodeKhachHang> TimKiemThongTinKhachHang();
+	vector<NodeKhachHang> TimKiemThongTinKhachHang(string);
 
 	vector<NodeTaiKhoanQuanTri> XemTatCaTaiKhoanQuanTri();
 	vector<NodeTaiKhoanKhachHang> XemTatCaTaiKhoanKhachHang();
@@ -42,5 +45,7 @@ public:
 	void PrintQT(vector<NodeTaiKhoanQuanTri>);
 	void PrintTKKH(vector<NodeTaiKhoanKhachHang>);
 	void PrintTTKH(vector<NodeKhachHang>);
+
+	void testanh();
 };
 

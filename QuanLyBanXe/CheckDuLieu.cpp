@@ -56,6 +56,20 @@ bool CheckDuLieu::CheckTKKH(string Email)
     delete stmt;
 }
 
+bool CheckDuLieu::CheckSDT(string SDT)
+{
+    Statement* stmt;
+    stmt = Check_DL->createStatement();
+    string SelectData = "Select *from KhachHang where SDT = '" + SDT + "'";
+    ResultSet* res = stmt->executeQuery(SelectData);
+    while (res->next()) {
+        return true;
+    }
+    return false;
+    delete res;
+    delete stmt;
+}
+
 bool CheckDuLieu::CheckManagerAccount(string Email, string Pass)
 {
     Statement* stmt;

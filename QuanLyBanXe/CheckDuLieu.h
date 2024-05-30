@@ -11,6 +11,7 @@ public:
 	bool checkbirthDay(string);
 	bool CheckTKQT(string);
 	bool CheckTKKH(string);
+	bool CheckSDT(string);
 	bool CheckUserAccount(string,string);
 	bool CheckManagerAccount(string,string);
 };
