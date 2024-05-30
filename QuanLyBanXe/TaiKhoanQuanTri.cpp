@@ -79,16 +79,19 @@ void TaiKhoanQuanTri::NhapDuLieuTaiKhoanKhachHang()
 void TaiKhoanQuanTri::NhapDuLieuThongTinKhachHang()
 {
     string TenKhachHang, SinhNhat, CCCD, DiaChi, GioiTinh, SoDienThoai, Email;
-    cout << "Nhap Email tai khoan can them thong tin khach hang"; cin >> Email;
+    cout << "Nhap Email tai khoan can them thong tin khach hang: "; cin >> Email;
     if (DL->CheckTKKH(Email)) {
+        cin.ignore();
         cout << "Ho va ten: "; getline(cin, TenKhachHang);
         cout << "Ngay thang nam sinh: "; cin >> SinhNhat;
         cout << "Gioi Tinh: "; cin >> GioiTinh;
         cout << "So can cuoc cong dan: "; cin >> CCCD;
         cout << "So dien thoai: "; cin >> SoDienThoai;
+        cin.ignore();
         cout << "Dia chi: "; getline(cin, DiaChi);
-        KH = new NodeKhachHang(TenKhachHang,SinhNhat,CCCD,SoDienThoai,DiaChi,GioiTinh,Email);
+        KH = new NodeKhachHang(TenKhachHang,SinhNhat,GioiTinh,SoDienThoai,CCCD,DiaChi,Email);
         QT->ThemThongTinKhachHang(KH);
+        cout << endl;
     }
     else {
         cout << "Tai khoan khong ton tai! Vui long kiem tra lai." << endl;
@@ -315,6 +318,7 @@ void TaiKhoanQuanTri::InputEditUserinfo()
         cout << "6. Sua so dien thoai: " << endl;
         cout << " Moi chon: "; cin >> chon;
         if (chon == 1) {
+            cin.ignore();
             cout << "Ho va Ten moi: "; getline(cin, TenKhachHang);
             QT->SuaThongTinKhachHang("TenKH",TenKhachHang,SoDienThoai);
         }
@@ -327,6 +331,7 @@ void TaiKhoanQuanTri::InputEditUserinfo()
             QT->SuaThongTinKhachHang("SoCCCD",CCCD,SoDienThoai);
         }
         else if (chon == 4) {
+            cin.ignore();
             cout << "Dia chi moi: "; getline(cin, DiaChi);
             QT->SuaThongTinKhachHang("DiaChi", DiaChi, SoDienThoai);
 
@@ -338,12 +343,12 @@ void TaiKhoanQuanTri::InputEditUserinfo()
         else if (chon == 6) {
             cout << "So dien thoai moi: "; cin >> SoDienThoaiMoi;
             if (DL->CheckSDT(SoDienThoaiMoi)){
-               QT->SuaThongTinKhachHang("SDT", SoDienThoaiMoi, SoDienThoai);
-               //hàm sửa trong Đơn hàng ** nếu dữ liệu trong bảng rỗng thì không cần cập nhật 
-               //hàm sửa trong lịch hẹn ** tương tự như trên 
+                cout << "So dien thoai nay da duoc dang ki voi mot tai khoan khac" << endl;
             }
             else {
-                cout << "So dien thoai nay da duoc dang ki voi mot tai khoan khac" << endl;
+                QT->SuaThongTinKhachHang("SDT", SoDienThoaiMoi, SoDienThoai);
+                //hàm sửa trong Đơn hàng ** nếu dữ liệu trong bảng rỗng thì không cần cập nhật 
+                //hàm sửa trong lịch hẹn ** tương tự như trên 
             }
         }
         else {
@@ -428,7 +433,7 @@ void TaiKhoanQuanTri::InputSearchUser()
 void TaiKhoanQuanTri::InputSearchUserInfo()
 {
     string SDT;
-    cout << "Nhap Email tai khoan quan tri can tim: "; cin >> SDT;
+    cout << "Nhap so dien thoai khach hang tim: "; cin >> SDT;
     if (DL->CheckSDT(SDT)) {
         QT->PrintTTKH(TimKiemThongTinKhachHang(SDT));
     }
@@ -447,7 +452,7 @@ vector<NodeTaiKhoanQuanTri> TaiKhoanQuanTri::TimKiemTaiKhoanQuanTri(string Email
         string SelectData = "Select *from ManagerAccount where ManagerEmail = '" + Email + "'";
         ResultSet* res = stmt->executeQuery(SelectData);
         while (res->next()) {
-            NodeTaiKhoanQuanTri account(res->getString("ManagerAccountID"), res->getString("ManagerEmail"), res->getString("ManagerAccountName"), res->getString("ManagerPass"));
+            NodeTaiKhoanQuanTri account( res->getString("ManagerEmail"), res->getString("ManagerAccountName"), res->getString("ManagerPass"));
             ManagerAccountSearch.push_back(account);
         }
         delete stmt;
@@ -468,7 +473,7 @@ vector<NodeTaiKhoanKhachHang> TaiKhoanQuanTri::TimKiemTaiKhoanKhachHang(string E
         string SelectData = "Select *from UserAccount where UserEmail = '" + Email + "'";
         ResultSet* res = stmt->executeQuery(SelectData);
         while (res->next()) {
-            NodeTaiKhoanKhachHang account(res->getString("UserAccountID"), res->getString("UserEmail"), res->getString("UserAccountName"), res->getString("UserPass"));
+            NodeTaiKhoanKhachHang account( res->getString("UserEmail"), res->getString("UserAccountName"), res->getString("UserPass"));
             UserAccountSearch.push_back(account);
         }
         delete stmt;
@@ -486,7 +491,7 @@ vector<NodeKhachHang> TaiKhoanQuanTri::TimKiemThongTinKhachHang(string SDT)
         vector<NodeKhachHang> UserInfoSearch;
         Statement* stmt;
         stmt = Check_tk->createStatement();
-        string SelectData = "Select *from KhachHang where UserEmail = '" +SDT + "'";
+        string SelectData = "Select *from KhachHang where SDT = '" +SDT + "'";
         ResultSet* res = stmt->executeQuery(SelectData);
         while (res->next()) {
             NodeKhachHang info(res->getString("TenKH"), res->getString("SoCCCD"), res->getString("NgaySinh"), res->getString("SDT"), res->getString("DiaChi"), res->getString("UserEmail"), res->getString("GioiTinh"));
@@ -509,7 +514,7 @@ vector<NodeTaiKhoanQuanTri> TaiKhoanQuanTri::XemTatCaTaiKhoanQuanTri()
     string SelectData = "Select *from ManagerAccount";
     ResultSet* res = stmt->executeQuery(SelectData);
     while (res->next()) {
-        NodeTaiKhoanQuanTri account(res->getString("ManagerAccountID"), res->getString("ManagerEmail"), res->getString("ManagerAccountName"), res->getString("ManagerPass"));
+        NodeTaiKhoanQuanTri account( res->getString("ManagerEmail"), res->getString("ManagerAccountName"), res->getString("ManagerPass"));
         ManagerAccountSearch.push_back(account);
     }
     delete stmt;
@@ -525,7 +530,7 @@ vector<NodeTaiKhoanKhachHang> TaiKhoanQuanTri::XemTatCaTaiKhoanKhachHang()
     string SelectData = "Select *from UserAccount";
     ResultSet* res = stmt->executeQuery(SelectData);
     while (res->next()) {
-        NodeTaiKhoanKhachHang account(res->getString("UserAccountID"), res->getString("UserEmail"), res->getString("UserAccountName"), res->getString("UserPass"));
+        NodeTaiKhoanKhachHang account( res->getString("UserEmail"), res->getString("UserAccountName"), res->getString("UserPass"));
         UserAccountSearch.push_back(account);
     }
     delete stmt;
@@ -541,7 +546,7 @@ vector<NodeKhachHang> TaiKhoanQuanTri::XemTatCaThongTinKhachHang()
     string SelectData = "Select *from KhachHang";
     ResultSet* res = stmt->executeQuery(SelectData);
     while (res->next()) {
-        NodeKhachHang account(res->getString("TenKH"), res->getString("NgaySinh"), res->getString("GioiTinh"), res->getString("SDT"), res->getString("SoCCCD"),res->getString("DiaChi"),res->getString("Email"));
+        NodeKhachHang account(res->getString("TenKH"), res->getString("SoCCCD"), res->getString("NgaySinh"), res->getString("SDT"), res->getString("DiaChi"),res->getString("UserEmail"),res->getString("GioiTinh"));
         UserInfo.push_back(account);
     }
     delete stmt;
@@ -552,7 +557,7 @@ vector<NodeKhachHang> TaiKhoanQuanTri::XemTatCaThongTinKhachHang()
 void TaiKhoanQuanTri::PrintQT(vector<NodeTaiKhoanQuanTri> check)
 {
     for (int i = 0; i < check.size(); i++) {
-        cout << check[i].GetManagerAccountID() << "\t" << check[i].GetManagerAccountEmail() << "\t" << "\t" << check[i].GetManagerAccountName() << "\t" <<check[i].GetManagerAccountPass()<< endl;
+        cout  << check[i].GetManagerAccountEmail() << "\t" << "\t" << check[i].GetManagerAccountName() << "\t" <<check[i].GetManagerAccountPass()<< endl;
 
     }
 }
@@ -560,14 +565,14 @@ void TaiKhoanQuanTri::PrintQT(vector<NodeTaiKhoanQuanTri> check)
 void TaiKhoanQuanTri::PrintTKKH(vector<NodeTaiKhoanKhachHang>check)
 {
     for (int i = 0; i < check.size(); i++) {
-        cout << check[i].GetID() << "\t" << check[i].GetEmail() << "\t" << check[i].GetName() << "\t" << check[i].GetPass() << endl;
+        cout  << check[i].GetEmail() << "\t" << check[i].GetName() << "\t" << check[i].GetPass() << endl;
     }
 }
 
 void TaiKhoanQuanTri::PrintTTKH(vector<NodeKhachHang>check)
 {
     for (int i = 0; i < check.size(); i++) {
-        cout << check[i].GetName() << "\t" << check[i].GetSex() << check[i].GetBirthday() << "\t" << check[i].GetPhoneNumber() << "\t" << check[i].GetIDCard() << "\t" << check[i].GetEmail() << "\t" << check[i].GetAddress()<<endl;
+        cout << check[i].GetName() << "\t" << check[i].GetSex() <<"\t" << check[i].GetBirthday() << "\t" << check[i].GetPhoneNumber() << "\t" << check[i].GetIDCard() << "\t" << check[i].GetEmail() << "\t" << check[i].GetAddress() << endl;
     }
 }
 
