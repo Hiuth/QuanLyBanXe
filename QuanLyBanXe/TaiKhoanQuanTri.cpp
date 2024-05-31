@@ -67,7 +67,8 @@ void TaiKhoanQuanTri::NhapDuLieuTaiKhoanKhachHang()
             cout << "Email da ton tai!. Vui long nhap lai Email khac" << endl;
         }
         else {
-            cout << "Nhap Ten Tai Khoan: "; cin >> TenTaiKhoan;
+            cin.ignore();
+            cout << "Nhap Ten Tai Khoan: ";getline(cin,TenTaiKhoan);
             cout << "Nhap Mat Khau: "; cin >> MatKhau;
             TKKH = new NodeTaiKhoanKhachHang(Email, TenTaiKhoan, MatKhau);
             QT->TaoTaiKhoanKhachHang(TKKH);
@@ -81,17 +82,47 @@ void TaiKhoanQuanTri::NhapDuLieuThongTinKhachHang()
     string TenKhachHang, SinhNhat, CCCD, DiaChi, GioiTinh, SoDienThoai, Email;
     cout << "Nhap Email tai khoan can them thong tin khach hang: "; cin >> Email;
     if (DL->CheckTKKH(Email)) {
-        cin.ignore();
-        cout << "Ho va ten: "; getline(cin, TenKhachHang);
-        cout << "Ngay thang nam sinh: "; cin >> SinhNhat;
-        cout << "Gioi Tinh: "; cin >> GioiTinh;
-        cout << "So can cuoc cong dan: "; cin >> CCCD;
-        cout << "So dien thoai: "; cin >> SoDienThoai;
-        cin.ignore();
-        cout << "Dia chi: "; getline(cin, DiaChi);
-        KH = new NodeKhachHang(TenKhachHang,SinhNhat,GioiTinh,SoDienThoai,CCCD,DiaChi,Email);
-        QT->ThemThongTinKhachHang(KH);
-        cout << endl;
+        if (DL->Check_DataUSer(Email)) {
+            cout << "Tai khoan da co du lieu! "<<endl;
+        }
+        else {
+            cin.ignore();
+            cout << "Ho va ten: "; getline(cin, TenKhachHang);
+            cout << "Ngay thang nam sinh: "; cin >> SinhNhat;
+            cout << "Gioi Tinh: "; cin >> GioiTinh;
+            cout << "So can cuoc cong dan: "; cin >> CCCD;
+            if (DL->check12number(CCCD)) {
+                if (DL->Check_CCCD(CCCD)) {
+                    cout << "So CCCD da ton tai! Vui long kiem tra lai";
+                }
+                else {
+                    cout << "Nhap CCCD thanh cong" << endl;
+                }
+            }
+            else {
+                cout << "SO CCCD PHAI CO 12 SO VA KHONG DUOC CO KI TU KHAC NGOAI SO!" << endl;
+            }
+
+            cout << "So dien thoai: "; cin >> SoDienThoai;
+
+            if (DL->check10number(SoDienThoai)) {
+                if (DL->CheckSDT(SoDienThoai)) {
+                    cout << "So dien thoai da ton tai! Vui long kiem tra lai";
+                }
+                else {
+                    cout << "Nhap so dien thoai thanh cong" << endl;
+                }
+            }
+            else {
+                cout << "SO DIEN THOAI PHAI CO 10 SO VA KHONG DUOC CO KI TU KHAC NGOAI SO!" << endl;
+            }
+            cin.ignore();
+            cout << "Dia chi: "; getline(cin, DiaChi);
+            KH = new NodeKhachHang(TenKhachHang, SinhNhat, GioiTinh, SoDienThoai, CCCD, DiaChi, Email);
+            QT->ThemThongTinKhachHang(KH);
+            cout << endl;
+        }
+
     }
     else {
         cout << "Tai khoan khong ton tai! Vui long kiem tra lai." << endl;

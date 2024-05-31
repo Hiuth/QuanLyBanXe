@@ -20,6 +20,33 @@ bool CheckDuLieu::check6Number(string Pass)
     return true;
 }
 
+bool CheckDuLieu::check10number(string SDT)
+{
+    if (SDT.size() != 10) {
+        return false;
+    }
+    for (char c : SDT) {
+        if (!isdigit(c)) {
+            return false;
+        }
+    }
+    return true;
+}
+
+
+bool CheckDuLieu::check12number(string CCCD) 
+{
+    if (CCCD.size() != 12) {
+        return false;
+    }
+    for (char c : CCCD) {
+        if (!isdigit(c)) {
+            return false;
+        }
+    }
+    return true;
+}
+
 bool CheckDuLieu::checkbirthDay(string check) { // need to fix
     for (char c : check) {
         if (!isdigit(c) && c != '/') {
@@ -70,6 +97,20 @@ bool CheckDuLieu::CheckSDT(string SDT)
     delete stmt;
 }
 
+bool CheckDuLieu::Check_CCCD(string CCCD)
+{
+    Statement* stmt;
+    stmt = Check_DL->createStatement();
+    string SelectData = "Select *from KhachHang where SDT = '" + CCCD + "'";
+    ResultSet* res = stmt->executeQuery(SelectData);
+    while (res->next()) {
+        return true;
+    }
+    return false;
+    delete res;
+    delete stmt;
+}
+
 bool CheckDuLieu::CheckManagerAccount(string Email, string Pass)
 {
     Statement* stmt;
@@ -82,6 +123,25 @@ bool CheckDuLieu::CheckManagerAccount(string Email, string Pass)
     return false;
     delete res;
     delete stmt;
+}
+
+bool CheckDuLieu::Check_DataUSer(string Email)
+{
+    try {
+        Statement* stmt;
+        stmt = Check_DL->createStatement();
+        string SelectData = "SELECT * FROM KhachHang WHERE UserEmail = '" + Email + "'";
+        ResultSet* res = stmt->executeQuery(SelectData);
+        while (res->next()) {
+            return true;
+        }
+        return false;
+        delete res;
+        delete stmt;
+    }
+    catch (sql::SQLException& e) {
+        cerr << "SQL Error: " << e.what() << std::endl;
+    }
 }
 
 bool CheckDuLieu::CheckUserAccount(string Email, string Pass)
