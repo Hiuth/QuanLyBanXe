@@ -1,4 +1,4 @@
-﻿#include "KhachHang.h"
+﻿#include "QuanLyKhachHang.h"
 #include "KetNoi.h"
 #include "CheckDuLieu.h"
 

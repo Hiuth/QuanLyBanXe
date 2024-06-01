@@ -46,7 +46,7 @@
     <ClCompile Include="NodeTaiKhoanQuanTri.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TaiKhoanQuanTri.cpp">
+    <ClCompile Include="QuanLyTaiKhoan.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="NodeTaiKhoanKhachHang.cpp">
@@ -55,7 +55,10 @@
     <ClCompile Include="NodeKhachHang.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="KhachHang.cpp">
+    <ClCompile Include="QuanLyKhachHang.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NodeQuanLyXe.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -74,19 +77,19 @@
     <ClInclude Include="NodeTaiKhoanQuanTri.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TaiKhoanQuanTri.h">
+    <ClInclude Include="QuanLyTaiKhoan.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="NodeTaiKhoanKhachHang.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TaiKhoanKhachHang.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="NodeKhachHang.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="KhachHang.h">
+    <ClInclude Include="QuanLyKhachHang.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeQuanLyXe.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

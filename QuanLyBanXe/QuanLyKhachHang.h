@@ -19,6 +19,7 @@ public:
     void SuaThongTinKhachHang(std::string, std::string, std::string);
     std::vector<NodeKhachHang> TimKiemThongTinKhachHang(std::string);
     std::vector<NodeKhachHang> XemTatCaThongTinKhachHang();
+    vector<NodeKhachHang> XemTatCaThongTinKhachHang();
     void PrintTTKH(std::vector<NodeKhachHang>);
     void testanh();
 };

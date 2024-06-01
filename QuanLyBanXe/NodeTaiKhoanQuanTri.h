@@ -8,7 +8,6 @@ class NodeTaiKhoanQuanTri
 private:
 	string ManagerAccountName;
 	string ManagerAccountPass;
-	string ManagerAccountID;
 	string ManagerAccountEmail;
 public:
 	NodeTaiKhoanQuanTri( string, string,string);
@@ -18,8 +17,6 @@ public:
 	void SetMangerAccountName(string val) { ManagerAccountName = val; }
 	string GetManagerAccountPass() { return ManagerAccountPass; }
 	void SetManagerAccountPass(string val) { ManagerAccountPass = val; }
-	string GetManagerAccountID() { return ManagerAccountID; }
-	void SetManagerAccountID(string val) { ManagerAccountID = val; }
 	string GetManagerAccountEmail() { return ManagerAccountEmail; }
 	void SetManagerAccountEmail(string val) { ManagerAccountEmail = val; }
 };
