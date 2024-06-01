@@ -12,4 +12,4 @@ private:
 public:
     TaiKhoanKhachHang();
     virtual ~TaiKhoanKhachHang();
-}
+};
