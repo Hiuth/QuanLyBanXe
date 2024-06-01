@@ -106,6 +106,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="KhachHang.cpp" />
     <ClCompile Include="NodeKhachHang.cpp" />
     <ClCompile Include="NodeTaiKhoanKhachHang.cpp" />
     <ClCompile Include="TaiKhoanQuanTri.cpp" />
@@ -121,6 +122,7 @@
   <ItemGroup>
     <ClInclude Include="CheckDuLieu.h" />
     <ClInclude Include="KetNoi.h" />
+    <ClInclude Include="KhachHang.h" />
     <ClInclude Include="NodeKhachHang.h" />
     <ClInclude Include="NodeTaiKhoanKhachHang.h" />
     <ClInclude Include="NodeTaiKhoanQuanTri.h" />

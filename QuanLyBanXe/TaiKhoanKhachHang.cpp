@@ -1,9 +1,11 @@
 ﻿#include "TaiKhoanKhachHang.h"
 #include "KetNoi.h"
-
+#include<fstream>
+#include<sstream>
 KetNoi* Check_TaiKhoanKhachHang = new KetNoi();
 Connection* Check_tk = Check_TaiKhoanKhachHang->CheckDatabase();
 NodeTaiKhoanKhachHang* TKKH;
+TaiKhoanKhachHang* KH = new TaiKhoanKhachHang();
 
 TaiKhoanKhachHang::TaiKhoanKhachHang() {
     this->head = nullptr;
@@ -17,7 +19,7 @@ void TaiKhoanKhachHang::DangNhap() {
     string email, pass;
     cout << "Nhap Email Tai Khoan: "; cin >> email;
     cout << "Nhap Mat Khau: "; cin >> pass;
-    if (DL->CheckManagerAccount(email, pass)) {
+    if (KH->CheckUserAccount(email, pass)) {
         cout << "Chao mung tro lai!" << endl;
     }
     else {
@@ -31,7 +33,7 @@ void TaiKhoanKhachHang::NhapDuLieuTaiKhoanKhachHang()
     for (int i = 0; i < n; i++) {
         string Email, TenTaiKhoan, MatKhau;
         cout << "Nhap Email: "; cin >> Email;
-        if (DL->CheckTKQT(Email)) {
+        if (KH->CheckTKKH(Email)) {
             cout << "Email da ton tai!. Vui long nhap lai Email khac" << endl;
         }
         else {
@@ -39,7 +41,7 @@ void TaiKhoanKhachHang::NhapDuLieuTaiKhoanKhachHang()
             cout << "Nhap Ten Tai Khoan: ";getline(cin, TenTaiKhoan);
             cout << "Nhap Mat Khau: "; cin >> MatKhau;
             TKKH = new NodeTaiKhoanKhachHang(Email, TenTaiKhoan, MatKhau);
-            QT->TaoTaiKhoanKhachHang(TKKH);
+            KH->TaoTaiKhoanKhachHang(TKKH);
             cout << endl;
         }
     }
@@ -77,12 +79,7 @@ void TaiKhoanKhachHang::TaoTaiKhoanKhachHang(NodeTaiKhoanKhachHang* p)
         cerr << "SQL Error: " << e.what() << std::endl;
     }
 }
-void TaiKhoanKhachHang::InputDelete() //da check
-{
-    string xoa;
-    cout << "Ten tai khoan can xoa: "; cin >> xoa;
-    QT->XoaTaiKhoanQuanTri(xoa);
-}
+
 void TaiKhoanKhachHang::XoaTaiKhoanKhachHang(string xoa)
 {
     Statement* stmt;
@@ -100,7 +97,7 @@ void TaiKhoanKhachHang::InputEditUser()
     int chon;
     string ChoCanSua, MuonDoiThanh, Email;
     cout << "Nhap Email tai khoan muon sua: "; cin >> Email;
-    if (DL->CheckTKKH(Email)) {
+    if (KH->CheckTKKH(Email)) {
         cout << "Chon che do sua " << endl;
         cout << "1.Sua Email" << endl;
         cout << "2.Sua Ten Tai Khoan" << endl;
@@ -108,15 +105,15 @@ void TaiKhoanKhachHang::InputEditUser()
         cout << " Moi chon: "; cin >> chon;
         if (chon == 1) {
             cout << "Nhap Email moi: "; cin >> MuonDoiThanh;
-            QT->SuaTaiKhoanKhachHang("UserEmail", MuonDoiThanh, Email);
+            KH->SuaTaiKhoanKhachHang("UserEmail", MuonDoiThanh, Email);
         }
         else if (chon == 2) {
             cout << "Nhap Ten Tai khoan Moi: "; cin >> MuonDoiThanh;
-            QT->SuaTaiKhoanKhachHang("UserAccountName", MuonDoiThanh, Email);
+            KH->SuaTaiKhoanKhachHang("UserAccountName", MuonDoiThanh, Email);
         }
         else if (chon == 3) {
             cout << "Nhap mat khau moi: "; cin >> MuonDoiThanh;
-            QT->SuaTaiKhoanKhachHang("UserPass", MuonDoiThanh, Email);
+            KH->SuaTaiKhoanKhachHang("UserPass", MuonDoiThanh, Email);
         }
         else {
             cout << "Vui Long chon lai!" << endl;
