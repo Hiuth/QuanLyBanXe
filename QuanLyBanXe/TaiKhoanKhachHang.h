@@ -20,4 +20,3 @@ public:
     void InputEditUserinfo();
     void SuaTaiKhoanKhachHang(string, string, string);
 };
-};
