@@ -1,6 +1,6 @@
 ﻿#include "KhachHang.h"
 #include "KetNoi.h"
-
+#include "CheckDuLieu.h"
 
 KetNoi* Check_TaiKhoanKhachHang = new KetNoi();
 Connection* Check_tk = Check_TaiKhoanKhachHang->CheckDatabase();
