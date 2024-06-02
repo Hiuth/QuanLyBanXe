@@ -11,7 +11,7 @@
 
 #include<iostream>
 #include"KetNoi.h"
-#include"TaiKhoanQuanTri.h"
+#include"QuanLyTaiKhoan.h"
 #include"CheckDuLieu.h"
 using namespace std;
 int main() {
