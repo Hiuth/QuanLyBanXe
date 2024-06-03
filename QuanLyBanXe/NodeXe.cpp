@@ -1,6 +1,6 @@
-#include "NodeQuanLyXe.h"
+#include "NodeXe.h"
 
-NodeQuanLyXe::NodeQuanLyXe(string MaXe, string TenXe, string GiaTien, string DongCo, string HopSo, string DanDong, string NamSanXuat, string TuiKhi, string HangXe, string TocDoToiDa, string KichThuoc, string KhoangSangGam, string PhanCapXe, string TonKho, string CongSuatToiDa)
+NodeXe::NodeXe(string MaXe, string TenXe, string GiaTien, string DongCo, string HopSo, string DanDong, string NamSanXuat, string TuiKhi, string HangXe, string TocDoToiDa, string KichThuoc, string KhoangSangGam, string PhanCapXe, string TonKho, string CongSuatToiDa)
 {
 	this->MaXe = MaXe;
 	this->TenXe = TenXe;
@@ -20,7 +20,7 @@ NodeQuanLyXe::NodeQuanLyXe(string MaXe, string TenXe, string GiaTien, string Don
 	this->pointer = NULL;
 }
 
-NodeQuanLyXe::~NodeQuanLyXe()
+NodeXe::~NodeXe()
 {
 
 }

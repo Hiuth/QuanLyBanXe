@@ -58,7 +58,13 @@
     <ClCompile Include="QuanLyKhachHang.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="NodeQuanLyXe.cpp">
+    <ClCompile Include="NodeXe.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="QuanLyXe.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NodeCauHinhXe.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -89,7 +95,13 @@
     <ClInclude Include="QuanLyKhachHang.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="NodeQuanLyXe.h">
+    <ClInclude Include="NodeXe.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="QuanLyXe.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeCauHinhXe.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,8 +1,11 @@
 ﻿#pragma once
 #include<string>
+#include<iostream>
+#include"KetNoi.h"
 #include "CheckDuLieu.h"
+#include <vector>
 using namespace std;
-class NodeQuanLyXe
+class NodeXe
 {
 private:
 	string MaXe;  // VFP, VF6,VF5, ...
@@ -20,10 +23,10 @@ private:
 	string PhanCapXe; // suv ,sedan, hatback, mpv,minicar
 	string TonKho;
 	string CongSuatToiDa;
-	NodeQuanLyXe* pointer;
+	NodeXe* pointer;
 public:
-	NodeQuanLyXe(string, string, string, string, string, string, string, string, string, string, string, string, string, string, string);
-	virtual ~NodeQuanLyXe();
+	NodeXe(string, string, string, string, string, string, string, string, string, string, string, string, string, string, string);
+	virtual ~NodeXe();
 
 	string LayTenXe() { return TenXe; }
 	void DatTenXe(string val) { TenXe = val; }
@@ -69,5 +72,8 @@ public:
 
 	string LaySoLuongTonKho() { return TonKho; }
 	void CaiDatSoLuongTonKho(string val) { TonKho = val; }
+
+	NodeXe* GetPointer() { return pointer; }
+	void SetPointer(NodeXe* val) { pointer = val; }
 };
 

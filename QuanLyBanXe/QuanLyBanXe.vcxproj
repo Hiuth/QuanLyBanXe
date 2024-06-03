@@ -106,11 +106,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="NodeCauHinhXe.cpp" />
     <ClCompile Include="QuanLyKhachHang.cpp" />
     <ClCompile Include="NodeKhachHang.cpp" />
-    <ClCompile Include="NodeQuanLyXe.cpp" />
+    <ClCompile Include="NodeXe.cpp" />
     <ClCompile Include="NodeTaiKhoanKhachHang.cpp" />
     <ClCompile Include="QuanLyTaiKhoan.cpp" />
+    <ClCompile Include="QuanLyXe.cpp" />
     <QtRcc Include="QuanLyBanXe.qrc" />
     <QtUic Include="QuanLyBanXe.ui" />
     <QtMoc Include="QuanLyBanXe.h" />
@@ -123,12 +125,14 @@
   <ItemGroup>
     <ClInclude Include="CheckDuLieu.h" />
     <ClInclude Include="KetNoi.h" />
+    <ClInclude Include="NodeCauHinhXe.h" />
     <ClInclude Include="QuanLyKhachHang.h" />
     <ClInclude Include="NodeKhachHang.h" />
-    <ClInclude Include="NodeQuanLyXe.h" />
+    <ClInclude Include="NodeXe.h" />
     <ClInclude Include="NodeTaiKhoanKhachHang.h" />
     <ClInclude Include="NodeTaiKhoanQuanTri.h" />
     <ClInclude Include="QuanLyTaiKhoan.h" />
+    <ClInclude Include="QuanLyXe.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
