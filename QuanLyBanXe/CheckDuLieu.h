@@ -29,5 +29,6 @@ public:
 	bool Check_CarID(string);
 	bool Check_CarConfigurationID(string);
 	bool Check_CarName(string);
+	bool CheckOderID(string);
 };
 

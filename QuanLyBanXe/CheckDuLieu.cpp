@@ -280,5 +280,18 @@ bool CheckDuLieu::checkSytax(string Pass)
     }
     return true;
 }
+bool CheckDuLieu::CheckOderID(string OrderID)
+{
+    Statement* stmt;
+    stmt = Check_DL->createStatement();
+    string SelectData = "Select *from Oder where OrDerID = '" + OrderID + "'";
+    ResultSet* res = stmt->executeQuery(SelectData);
+    while (res->next()) {
+        return true;
+    }
+    return false;
+    delete res;
+    delete stmt;
+}
 
 
