@@ -31,6 +31,19 @@ bool CheckDuLieu::check6Number(string Pass)
     return true;
 }
 
+bool CheckDuLieu::check9number(string money)
+{
+    if (money.size() != 9) {
+        return false;
+    }
+    for (char c : money) {
+        if (!isdigit(c)) {
+            return false;
+        }
+    }
+    return true;
+}
+
 bool CheckDuLieu::check10number(string SDT)
 {
     if (SDT.size() != 10) {
@@ -93,9 +106,9 @@ bool CheckDuLieu::Check_Year(string year)
     int currentDay = now->tm_mday;
 
     if (stoi(year) > currentYear) {
-        return true;
+        return false;
     }
-    return false;
+    return true;
 }
 
 bool CheckDuLieu::CheckTKQT(string Email)

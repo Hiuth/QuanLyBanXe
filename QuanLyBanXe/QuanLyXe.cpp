@@ -24,11 +24,13 @@ void QuanLyXe::ThemThongTinXe()//có thể sử dụng hàm này cho front end, 
 {
     string MaXe, TenXe, GiaTien, DongCo,HopSo,DanDong,NamSanXuat,TuiKhi,HangXe,TocDoToiDa,KichThuoc,KhoangSangGam,ChieuDaiCoSo,TonKho,PhanCapXe,CongSuatToiDa;
     cout << "Nhap ma xe: "; cin >> MaXe;
-    if (DL_QLX->Check_CarID(MaXe)) {
+    if (DL_QLX->Check_CarID(MaXe)==false) {
+        cin.ignore();
         cout << "Nhap ten xe: "; getline(cin, TenXe);
-        if (DL_QLX->Check_CarName(TenXe)) {
+        if (DL_QLX->Check_CarName(TenXe) == false) {
             cout << "Nhap gia tien chua bao gom pin cua xe: "; cin >> GiaTien;
-            if (DL_QLX->check10number(GiaTien) || DL_QLX->check11number(GiaTien)) {
+            if (DL_QLX->check10number(GiaTien) || DL_QLX->check11number(GiaTien) || DL_QLX->check9number(GiaTien)) {
+                cin.ignore();
                 cout << "Nhap loai dong co cua xe: "; getline(cin, DongCo);
                 cout << "Nhap loai hop so; "; getline(cin, HopSo);
                 cout << "Nhap kieu dan dong: "; getline(cin, DanDong);
@@ -39,6 +41,7 @@ void QuanLyXe::ThemThongTinXe()//có thể sử dụng hàm này cho front end, 
                         cout << "Nhap hang xe: "; cin >> HangXe;
                         cout << "Toc Do toi da cua xe: "; cin >> TocDoToiDa;
                         if (DL_QLX->Check_Number(TocDoToiDa)) {
+                            cin.ignore();
                             cout << "Nhap vao kich thuoc tong the cua xe: "; getline(cin, KichThuoc);
                             cout << "Nhap vao khoang sang gam: "; cin >> KhoangSangGam;
                             if (DL_QLX->Check_Number(KhoangSangGam)) {
@@ -93,7 +96,23 @@ void QuanLyXe::ThemCauHinhXe()
     string MaCauHinh,LoaiPin,MauSac,MaXe,GiaPin;
     cout << "Nhap vao Ma Xe muon tao cau hinh: "; cin >> MaXe;
     if (DL_QLX->Check_CarID(MaXe)) {
-
+        cout << "Nhap ma cau hinh: "; cin >> MaCauHinh;
+        if (DL_QLX->Check_CarConfigurationID(MaCauHinh)) {
+            cout << "Ma Cau Hinh nay da ton tai !!!" << endl;
+        }
+        else {
+            cout << "Nhap loai pin: "; cin >> LoaiPin;
+            cin.ignore();
+            cout << "Nhap loai mau sac: "; getline(cin,MauSac);
+            cout << "Nhap gia pin:  "; cin >> GiaPin;
+            if (DL_QLX->check9number(GiaPin)) {
+                CauHinh = new NodeCauHinhXe(MaCauHinh, LoaiPin, MauSac, MaXe, GiaPin);
+                QL->NhapCauHinhXe(CauHinh);
+            }
+            else {
+                cout << "Du lieu nhap vao phai la so!!!!" << endl;
+            }
+        } 
     }
     else {
         cout << "Ma xe khong ton tai! Vui long kiem tra lai!!!" << endl;
@@ -199,6 +218,61 @@ void QuanLyXe::NhapCauHinhXe(NodeCauHinhXe* p)
     }
 }
 
+void QuanLyXe::NhapThongTinSuaXe()
+{
+    int chon = 0;
+    string maxe, chocansua, muondoithanh;
+    cout << "Nhap ma xe can sua thong tin: "; cin >> maxe;
+    if (DL_QLX->Check_CarID(maxe)) {
+        cout << "1. Sua ten xe." << endl;
+        cout << "2. Sua gia tien." << endl;
+        cout << "3. Sua ma xe." << endl;
+        cout << "Moi chon: "; cin >> chon;
+        if (chon == 1) {
+            cin.ignore();
+            cout << "Nhap ten xe moi: "; getline(cin, muondoithanh);
+            if (DL_QLX->Check_CarName(muondoithanh)) {
+                cout << "Ten da ton tai!" << endl;
+            }
+            else {
+                QL->SuaThongTinXe("TenXe",muondoithanh,maxe);
+            }
+        }
+        else if (chon == 2) {
+            cout << "Nhap gia tien moi: "; cin >> muondoithanh;
+            if (DL_QLX->check9number(muondoithanh) ||DL_QLX->check10number(muondoithanh) || DL_QLX->check11number(muondoithanh)) {
+                QL->SuaThongTinXe("GiaTien", muondoithanh, maxe);
+            }
+            else {
+                cout << "Vui long nhap lai gia tien!!!" << endl;
+            }
+        }
+        else if (chon == 3) {
+            cout << "Nhap ma xe moi: "; cin >> maxe;
+            if (DL_QLX->Check_CarID(maxe)) {
+                cout << "Ma xe da ton tai! Vui long kiem tra lai!!!" << endl;
+            }
+            else {
+                //QL->SuaMaXeCuaDonHang
+                //QL->SuaMaXeCuaLichHen
+              /*  QL->SuaMaXeCuaCauHinh("MaXe", muondoithanh, maxe);
+                QL->SuaThongTinXe("MaXe",muondoithanh,maxe);*/
+            }
+        }
+        else {
+            cout << "Vui long chon lai." << endl;
+        }
+    }
+    else {
+        cout << "Ma xe khong ton tai! Vui long kiem tra lai" << endl;
+    }
+}
+
+void QuanLyXe::NhapThongTinSuaCauHinh()
+{
+
+}
+
 void QuanLyXe::SuaThongTinXe(string ChoCanSua,string MuonDoiThanh,string MaXe)
 { 
     try {
@@ -227,14 +301,28 @@ void QuanLyXe::SuaCauHinhXe(string ChoCanSua, string MuonDoiThanh, string MaCauH
     }
 }
 
+
+void QuanLyXe::Xoa()
+{
+    string maxe;
+    cout << "Nhap ma xe can xoa: "; cin >> maxe;
+    if (DL_QLX->Check_CarID(maxe)) {
+        QL->XoaThongTinXe(maxe);
+    }
+    else {
+        cout << "Vui long kiem tra lai du lieu." << endl;                                                                                                       
+    }
+
+}
+
 void QuanLyXe::XoaThongTinXe(string xoa)
 {
     Statement* stmt;
     stmt = Check_QLX->createStatement();
     string SelectData = "Delete from XEVINFAST where MaXe = '" + xoa + "'";
     string SelectData2 = "Delete from CauHinhXe where MaXe = '" + xoa + "'";
-    int rows_affected = stmt->executeUpdate(SelectData);
     stmt->executeUpdate(SelectData2);
+    int rows_affected = stmt->executeUpdate(SelectData);
     delete stmt;
 }
 
@@ -242,7 +330,7 @@ void QuanLyXe::XoaCauHinhXe(string xoa)
 {
     Statement* stmt;
     stmt = Check_QLX->createStatement();
-    string SelectData = "Delete from CauHinhXe where MaXe = '" + xoa + "'";
+    string SelectData = "Delete from CauHinhXe where MaCauHinh = '" + xoa + "'";
     int rows_affected = stmt->executeUpdate(SelectData);
     delete stmt;
 }

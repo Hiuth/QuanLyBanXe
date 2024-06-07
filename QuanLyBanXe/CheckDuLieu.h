@@ -7,6 +7,7 @@ public:
 	bool CheckSpacebar(string);
 	bool Check_Number(string);// kiểm tra dữ liệu có phải là số không 
 	bool check6Number(string); // kiểm tra mật khẩu nếu nhỏ hơn 6 thì bắt nhập lại 
+	bool check9number(string);
 	bool check10number(string);//kiểm tra độ dài số điện thoại, giá tiền 
 	bool check11number(string);
 	bool check12number(string);// kiểm tra độ dài căn cước công dân

@@ -17,11 +17,12 @@ public:
 	void NhapThongTinXeMoi(NodeXe*);
 	void NhapCauHinhXe(NodeCauHinhXe*);
 
-	void NhapThongTinSua();
+	void NhapThongTinSuaXe();
 	void NhapThongTinSuaCauHinh();
 	void SuaThongTinXe(string,string,string);
 	void SuaCauHinhXe(string,string,string);
-	
+
+	void Xoa();
 	void XoaThongTinXe(string);
 	void XoaCauHinhXe(string);
 
