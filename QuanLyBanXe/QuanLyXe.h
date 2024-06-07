@@ -12,21 +12,34 @@ public:
 	QuanLyXe();
 	virtual ~QuanLyXe();
 
+	void ThemThongTinXe();
+	void ThemCauHinhXe();
 	void NhapThongTinXeMoi(NodeXe*);
 	void NhapCauHinhXe(NodeCauHinhXe*);
 
-	void SuaThongTinXe(NodeXe*);
-	void SuaCauHinhXe(NodeCauHinhXe*);
+	void NhapThongTinSua();
+	void NhapThongTinSuaCauHinh();
+	void SuaThongTinXe(string,string,string);
+	void SuaCauHinhXe(string,string,string);
+	
+	void XoaThongTinXe(string);
+	void XoaCauHinhXe(string);
 
 	vector<NodeXe> XemThongTinXe();// Xem toàn bộ thông tin xe
+	//*tồn kho chỉ có quản trị được xem, người dùng không xem được 
+
 	vector<NodeCauHinhXe> XemCauHinhXe();// dành cho quản trị viên, chức năng dùng để kiểm tra các loại cấu hình còn trong kho 
 
-	vector<NodeXe> TimKiemThongTinXe();// tìm theo tên xe, số túi khí, ...
-	vector<NodeCauHinhXe> TimKiemCauHinhXe();//tìm kiếm theo nhu cầu như là theo màu sắc, loại pin.
+	vector<NodeXe> TimKiemThongTinXe(string,string);// tìm theo tên xe, số túi khí, ...
+	vector<NodeCauHinhXe> TimKiemCauHinh(string,string);//tìm kiếm theo nhu cầu như là theo màu sắc, loại pin.
 
 	void InThongtinTimKiem(vector<NodeXe>);
 	void InThongTinTimKiemCauHinh(vector<NodeCauHinhXe>);
 
-	vector<NodeXe> SapXepTheoYeuCau();// theo giá tiền tăng dần hoặc giảm dần 
+	vector<NodeXe> SapXepTheoGiaTienTangDan(vector<NodeXe>);// theo giá tiền tăng dần hoặc tăng dần 
+	vector<NodeXe> SapXepTheoGiaTienGiamDan(vector<NodeXe>);// theo giá tiền tăng dần hoặc giảm dần 
+	vector<NodeXe> SapXepTheoTonKhoTangDan(vector<NodeXe>);// theo tồn kho tiền tăng dần hoặc giảm dần, chỉ có quản trị được truy cập tới
+	vector<NodeXe> SapXepTheoTonKhoGiamDan(vector<NodeXe>);// theo tồn kho tiền tăng dần hoặc giảm dần, chỉ có quản trị được truy cập
+
 };
 

@@ -20,12 +20,13 @@ private:
 	string TocDoToiDa;
 	string KichThuoc;
 	string KhoangSangGam;
+	string ChieuDaiCoSo;
 	string PhanCapXe; // suv ,sedan, hatback, mpv,minicar
 	string TonKho;
 	string CongSuatToiDa;
 	NodeXe* pointer;
 public:
-	NodeXe(string, string, string, string, string, string, string, string, string, string, string, string, string, string, string);
+	NodeXe(string, string, string, string, string, string, string, string, string, string, string, string, string, string, string,string);
 	virtual ~NodeXe();
 
 	string LayTenXe() { return TenXe; }
@@ -72,6 +73,9 @@ public:
 
 	string LaySoLuongTonKho() { return TonKho; }
 	void CaiDatSoLuongTonKho(string val) { TonKho = val; }
+
+	string LayChieuDaiCoSo() { return ChieuDaiCoSo; }
+	void CaiDatChieuDaiCoSo(string val) { ChieuDaiCoSo = val; }
 
 	NodeXe* GetPointer() { return pointer; }
 	void SetPointer(NodeXe* val) { pointer = val; }

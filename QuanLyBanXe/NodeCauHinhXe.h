@@ -6,10 +6,11 @@ private:
 	string MaCauHinh;
 	string LoaiPin;
 	string MauSac;
+	string GiaPin;
 	string MaXe;
 	NodeCauHinhXe* pointer;
 public:
-	NodeCauHinhXe(string,string,string,string);
+	NodeCauHinhXe(string,string,string,string,string);
 	virtual ~NodeCauHinhXe();
 
 	string LayMaCauhinhXe() { return MaCauHinh; }
@@ -26,5 +27,8 @@ public:
 
 	NodeCauHinhXe* GetPointer() { return pointer; }
 	void SetPointer(NodeCauHinhXe* val) { pointer = val; }
+
+	string LayGiaPin() { return GiaPin; }
+	void CaiDatGiaPin(string val) { GiaPin = val; }
 };
 
