@@ -31,8 +31,11 @@ public:
 
 	vector<NodeCauHinhXe> XemCauHinhXe();// dành cho quản trị viên, chức năng dùng để kiểm tra các loại cấu hình còn trong kho 
 
+	void NhapThongTinXeCanTim();
+	void NhapThongTinCauHinhCanTim();
 	vector<NodeXe> TimKiemThongTinXe(string,string);// tìm theo tên xe, số túi khí, ...
 	vector<NodeCauHinhXe> TimKiemCauHinh(string,string);//tìm kiếm theo nhu cầu như là theo màu sắc, loại pin.
+
 
 	void InThongtinTimKiem(vector<NodeXe>);
 	void InThongTinTimKiemCauHinh(vector<NodeCauHinhXe>);

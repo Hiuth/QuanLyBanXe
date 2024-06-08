@@ -369,6 +369,74 @@ vector<NodeCauHinhXe> QuanLyXe::XemCauHinhXe()
     delete res;
     return CauHinh;
 }
+
+void QuanLyXe::NhapThongTinXeCanTim()
+{
+    int chon;
+    string cantim;
+    cout << "1. Tim kiem thong tin theo ma xe." << endl;
+    cout << "2. Tim kiem thong tin theo ten xe. " << endl;
+    cout << "3. Tim kiem thong tin theo so tui khi." << endl;
+    cout << "4. Tim kiem thong tin theo hang xe." << endl;
+    cout << "5. Tim kiem thong tin theo phan cap xe." << endl;
+    cout << "6. Tim kiem thong tin theo cong suat dong co." << endl;
+    cout << "Moi chon: "; cin >> chon;
+    if (chon == 1) {
+        cout << "Nhap ma xe: "; cin >> cantim;
+        QL->InThongtinTimKiem(TimKiemThongTinXe("MaXe", cantim));
+    }
+    else if (chon == 2) {
+        cin.ignore();
+        cout << "Nhap ten xe: "; getline(cin, cantim);
+        QL->InThongtinTimKiem(TimKiemThongTinXe("TenXe", cantim));
+    }
+    else if (chon == 3) {
+        cout << "Nhap so tui khi can tim: "; cin >> cantim;
+        QL->InThongtinTimKiem(TimKiemThongTinXe("TuiKhi", cantim));
+    }
+    else if (chon == 4) {
+        cout << "Nhap hang xe can tim: "; cin >> cantim;
+        QL->InThongtinTimKiem(TimKiemThongTinXe("HangXe", cantim));
+    }
+    else if (chon == 5) {
+        cout << "Nhap phan cap xe can tim: "; cin >> cantim;
+        QL->InThongtinTimKiem(TimKiemThongTinXe("PhanCapXe", cantim));
+    }
+    else if (chon == 6) {
+        cout << "Nhap cong suat dong co can tim: "; cin >> cantim;
+        QL->InThongtinTimKiem(TimKiemThongTinXe("CongSuatDongCo", cantim));
+    }
+    else {
+        cout << "Vui long chon lai!" << endl;
+    }
+}
+
+void QuanLyXe::NhapThongTinCauHinhCanTim()
+{
+    int chon;
+    string cantim;
+    cout << "1. Tim kiem thong tin theo ma xe." << endl;
+    cout << "2. Tim kiem thong tin theo loai pin. " << endl;
+    cout << "3. Tim kiem thong tin theo mau sac." << endl;
+    cout << "Moi chon: "; cin >> chon;
+    if (chon == 1) {
+        cout << "Nhap ma xe: "; cin >> cantim;
+        QL->InThongTinTimKiemCauHinh(TimKiemCauHinh("MaXe", cantim));
+    }
+    else if (chon == 2) {
+        cin.ignore();
+        cout << "Nhap loai pin: "; getline(cin, cantim);
+        QL->InThongTinTimKiemCauHinh(TimKiemCauHinh("LoaiPin", cantim));
+    }
+    else if (chon == 3) {
+        cin.ignore();
+        cout << "Nhap mau sac: "; getline(cin,cantim);
+        QL->InThongTinTimKiemCauHinh(TimKiemCauHinh("MauSac", cantim));
+    }
+    else {
+        cout << "Vui long chon lai!" << endl;
+    }
+}
     
 
 vector<NodeXe> QuanLyXe::TimKiemThongTinXe(string LoaiMuonTim, string MuonTim)
@@ -376,7 +444,7 @@ vector<NodeXe> QuanLyXe::TimKiemThongTinXe(string LoaiMuonTim, string MuonTim)
     vector<NodeXe> VinfastCar;
     Statement* stmt;
     stmt = Check_QLX->createStatement();
-    string SelectData = "Select *from XEVINFAST where '" + LoaiMuonTim + "' = '" + MuonTim + "'";
+    string SelectData = "Select *from XEVINFAST where " + LoaiMuonTim + "= '" + MuonTim + "'";
     ResultSet* res = stmt->executeQuery(SelectData);
     while (res->next()) {
         NodeXe account(res->getString("MaXe"), res->getString("TenXe"), res->getString("GiaTien"), res->getString("DongCo")
@@ -396,7 +464,7 @@ vector<NodeCauHinhXe> QuanLyXe::TimKiemCauHinh(string LoaiMuonTim,string MuonTim
         vector<NodeCauHinhXe> CarOp;
         Statement* stmt;
         stmt = Check_QLX->createStatement();
-        string SelectData = "Select *from CauHinhXe where '"+LoaiMuonTim+"' = '" + MuonTim + "'";
+        string SelectData = "Select *from CauHinhXe where "+LoaiMuonTim+" = '" + MuonTim + "'";
         ResultSet* res = stmt->executeQuery(SelectData);
         while (res->next()) {
            NodeCauHinhXe Car(res->getString("MaCauHinh"), res->getString("LoaiPin"), res->getString("MauSac"),res->getString("MaXe"), res->getString("GiaPin"));
@@ -426,7 +494,7 @@ void QuanLyXe::InThongtinTimKiem(vector<NodeXe> p)
 void QuanLyXe::InThongTinTimKiemCauHinh(vector<NodeCauHinhXe> p)
 {
     for (int i = 0; i < p.size(); i++) {
-        cout << p[i].LayMaCauhinhXe() << "\t" << p[i].LayLoaiPin() << "\t" << p[i].LayGiaPin() << "\t" << p[i].LayMauSac() << p[i].LayMaXe() << endl;
+        cout << p[i].LayMaCauhinhXe() << "\t" << p[i].LayLoaiPin() << "\t" << p[i].LayGiaPin() << "\t" << p[i].LayMauSac() <<"\t"<< p[i].LayMaXe() << endl;
     }
 }
 

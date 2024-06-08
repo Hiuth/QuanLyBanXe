@@ -35,9 +35,13 @@ int main() {
 	//TKQT->PrintTKKH(TKQT->XemTatCaTaiKhoanKhachHang());
 
 	//
-	Xe->ThemThongTinXe();
+	//Xe->ThemThongTinXe();
 	//Xe->ThemCauHinhXe();
 	//Xe->NhapThongTinSuaXe();
-	Xe->Xoa();
+	//Xe->Xoa();
+	Xe->NhapThongTinXeCanTim();
+	Xe->NhapThongTinCauHinhCanTim();
+
+
 	Xe->InThongtinTimKiem(Xe->SapXepTheoGiaTienTangDan(Xe->XemThongTinXe()));
 }
