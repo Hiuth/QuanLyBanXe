@@ -437,6 +437,16 @@ void QuanLyXe::NhapThongTinCauHinhCanTim()
         cout << "Vui long chon lai!" << endl;
     }
 }
+
+void QuanLyXe::TimKiemMaXe()
+{
+    string mausac, loaipin, maxe;
+    cin.ignore();
+    cout << "Nhap mau sac: "; getline(cin, mausac);
+    cout << "Nhap loai pin: "; getline(cin, loaipin);
+    cout << "Nhap ma xe: "; getline(cin, maxe);
+    QL->InThongTinTimKiemCauHinh(TimMaCauHinh(maxe, mausac, loaipin));
+}
     
 
 vector<NodeXe> QuanLyXe::TimKiemThongTinXe(string LoaiMuonTim, string MuonTim)
@@ -472,6 +482,27 @@ vector<NodeCauHinhXe> QuanLyXe::TimKiemCauHinh(string LoaiMuonTim,string MuonTim
         }
         delete stmt;
         delete res;
+        return CarOp;
+    }
+    catch (sql::SQLException& e) {
+        cerr << "SQL Error: " << e.what() << std::endl;
+    }
+}
+
+vector<NodeCauHinhXe> QuanLyXe::TimMaCauHinh(string MaXe, string MauSac, string LoaiPin)
+{
+    try {
+        vector<NodeCauHinhXe> CarOp;
+        Statement* stmt;
+        stmt = Check_QLX->createStatement();
+        string SelectData = "Select *from CauHinhXe where MaXe = '" + MaXe + "' AND MauSac = '" + MauSac + "'AND  LoaiPin = '" + LoaiPin + "' ";
+        ResultSet* res = stmt->executeQuery(SelectData);
+        while (res->next()) {
+            NodeCauHinhXe Car(res->getString("MaCauHinh"), res->getString("LoaiPin"), res->getString("MauSac"), res->getString("MaXe"), res->getString("GiaPin"));
+            CarOp.push_back(Car);
+        }
+        delete res;
+        delete stmt;
         return CarOp;
     }
     catch (sql::SQLException& e) {

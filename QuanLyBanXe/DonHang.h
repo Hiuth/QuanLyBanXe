@@ -1,4 +1,8 @@
 #include <string>
+#include"NodeDonHang.h"
+#include"NodeXe.h"
+#include"NodeCauHinhXe.h"
+#include"QuanLyXe.h"
 using namespace std;
 
 class DonHang {
@@ -11,7 +15,8 @@ public:
     virtual ~DonHang();
     void NhapDuLieuThongTinDonHang();
     void ThemThongTinDonHang(NodeDonHang*);
-    long long TongGiaTriDonHang();
+    void check_TGT();
+    long long TongGiaTriDonHang(string,string,string);
     void Xoa();
     void XoaThongTinDonHang(string);
     void InputEditOrderInfo();

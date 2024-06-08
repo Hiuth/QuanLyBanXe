@@ -67,6 +67,12 @@
     <ClCompile Include="NodeCauHinhXe.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="NodeDonHang.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DonHang.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="QuanLyBanXe.h">
@@ -102,6 +108,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="NodeCauHinhXe.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeDonHang.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DonHang.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

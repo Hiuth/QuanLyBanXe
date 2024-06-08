@@ -14,12 +14,14 @@
 #include"QuanLyTaiKhoan.h"
 #include"CheckDuLieu.h"
 #include"QuanLyXe.h"
+#include"DonHang.h"
 using namespace std;
 int main() {
 	KetNoi* KN = new KetNoi();
 	TaiKhoanQuanTri* TKQT = new TaiKhoanQuanTri();
 	CheckDuLieu* DL = new CheckDuLieu();
 	QuanLyXe* Xe = new QuanLyXe();
+	DonHang* DH = new DonHang();
 	//TKQT->DangNhap();
 	//TKQT->NhapDuLieuTaiKhoanQuanTri();
 	//6TKQT->NhapDuLieuTaiKhoanKhachHang();
@@ -39,9 +41,9 @@ int main() {
 	//Xe->ThemCauHinhXe();
 	//Xe->NhapThongTinSuaXe();
 	//Xe->Xoa();
-	Xe->NhapThongTinXeCanTim();
-	Xe->NhapThongTinCauHinhCanTim();
-
-
-	Xe->InThongtinTimKiem(Xe->SapXepTheoGiaTienTangDan(Xe->XemThongTinXe()));
+	//Xe->NhapThongTinXeCanTim();
+	//Xe->NhapThongTinCauHinhCanTim();
+	//Xe->TimKiemMaXe();
+	//Xe->InThongtinTimKiem(Xe->SapXepTheoGiaTienTangDan(Xe->XemThongTinXe()));
+	DH->check_TGT();
 }

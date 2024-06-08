@@ -106,7 +106,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DonHang.cpp" />
     <ClCompile Include="NodeCauHinhXe.cpp" />
+    <ClCompile Include="NodeDonHang.cpp" />
     <ClCompile Include="QuanLyKhachHang.cpp" />
     <ClCompile Include="NodeKhachHang.cpp" />
     <ClCompile Include="NodeXe.cpp" />
@@ -124,8 +126,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CheckDuLieu.h" />
+    <ClInclude Include="DonHang.h" />
     <ClInclude Include="KetNoi.h" />
     <ClInclude Include="NodeCauHinhXe.h" />
+    <ClInclude Include="NodeDonHang.h" />
     <ClInclude Include="QuanLyKhachHang.h" />
     <ClInclude Include="NodeKhachHang.h" />
     <ClInclude Include="NodeXe.h" />

@@ -1,5 +1,4 @@
 #include "DonHang.h"
-#include "NodeDonHang.h"
 #include "KetNoi.h"
 #include "CheckDuLieu.h"
 #include <iostream>
@@ -11,6 +10,7 @@ KetNoi* Check_DonHang = new KetNoi();
 Connection* Check_DH = Check_DonHang->CheckDatabase();
 CheckDuLieu* DL_DH = new CheckDuLieu();
 DonHang* DH = new DonHang();
+QuanLyXe* QLX = new QuanLyXe();
 DonHang::DonHang() {
     this->head = NULL;
     this->tail = NULL;
@@ -87,6 +87,26 @@ void DonHang::ThemThongTinDonHang(NodeDonHang* p) {
         cerr << "SQL Error: " << e.what() << endl;
     }
 }
+
+void DonHang::check_TGT()
+{
+    string mausac, loaipin, maxe;
+    cout << "Nhap mau sac: "; getline(cin, mausac);
+    cout << "Nhap loai pin: "; getline(cin, loaipin);
+    cout << "Nhap ma xe: "; getline(cin, maxe);
+    cout << "Tong gia tri don dat hang: " << TongGiaTriDonHang(maxe, mausac, loaipin)<<endl;
+}
+
+long long DonHang::TongGiaTriDonHang(string MaXe,string MauSac,string LoaiPin)
+{
+    vector<NodeXe> p1; 
+    vector<NodeCauHinhXe> p2;
+    p1 = QLX->TimKiemThongTinXe("MaXe",MaXe);
+    p2 = QLX->TimMaCauHinh(MaXe,MauSac,LoaiPin);
+    long long tonggia = stoll(p1[0].LayGiaTien()) + stoll(p2[0].LayGiaPin());
+    return tonggia;
+}
+
 void DonHang::Xoa()
 {
     string donhang;

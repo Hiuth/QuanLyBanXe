@@ -33,8 +33,10 @@ public:
 
 	void NhapThongTinXeCanTim();
 	void NhapThongTinCauHinhCanTim();
+	void TimKiemMaXe();
 	vector<NodeXe> TimKiemThongTinXe(string,string);// tìm theo tên xe, số túi khí, ...
 	vector<NodeCauHinhXe> TimKiemCauHinh(string,string);//tìm kiếm theo nhu cầu như là theo màu sắc, loại pin.
+	vector<NodeCauHinhXe> TimMaCauHinh(string, string, string);
 
 
 	void InThongtinTimKiem(vector<NodeXe>);

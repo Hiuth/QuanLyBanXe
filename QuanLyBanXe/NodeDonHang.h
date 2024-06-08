@@ -20,7 +20,7 @@ private:
 public:
 
     NodeDonHang(string, string, string, string, long long, string, int, int, string);
-    virtual ~NodeDonHang() {}
+    virtual ~NodeDonHang();
 
     string GetMaDonHang() { return MaDonHang; }
     void SetMaDonHang(int val) { MaDonHang = val; }
