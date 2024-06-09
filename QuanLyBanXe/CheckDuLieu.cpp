@@ -257,6 +257,7 @@ bool CheckDuLieu::Check_CarName(string TenXe)
     }
 }
 
+
 bool CheckDuLieu::CheckUserAccount(string Email, string Pass)
 {
     Statement* stmt;
