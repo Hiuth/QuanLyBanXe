@@ -108,6 +108,7 @@
   <ItemGroup>
     <ClCompile Include="DonHang.cpp" />
     <ClCompile Include="NodeCauHinhXe.cpp" />
+    <ClCompile Include="NodeDaiLy.cpp" />
     <ClCompile Include="NodeDonHang.cpp" />
     <ClCompile Include="NodeHoTro.cpp" />
     <ClCompile Include="NodeLHBaoDuong.cpp" />
@@ -131,6 +132,7 @@
     <ClInclude Include="DonHang.h" />
     <ClInclude Include="KetNoi.h" />
     <ClInclude Include="NodeCauHinhXe.h" />
+    <ClInclude Include="NodeDaiLy.h" />
     <ClInclude Include="NodeDonHang.h" />
     <ClInclude Include="NodeHoTro.h" />
     <ClInclude Include="NodeLHBaoDuong.h" />

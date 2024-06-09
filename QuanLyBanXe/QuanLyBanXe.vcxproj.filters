@@ -79,6 +79,9 @@
     <ClCompile Include="NodeLHBaoDuong.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="NodeDaiLy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="QuanLyBanXe.h">
@@ -126,6 +129,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="NodeLHBaoDuong.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeDaiLy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
