@@ -20,8 +20,9 @@ public:
     void Xoa();
     void XoaThongTinDonHang(string);
     void InputEditOrderInfo();
-    void SuaThongTinDonHang(int, const string&, const string&);
-    vector<NodeDonHang> TimKiemThongTinDonHang(int);
+    void InputSearchOrder();
+    void SuaThongTinDonHang(string, string, string);
+    vector<NodeDonHang> TimKiemThongTinDonHang(string);
     vector<NodeDonHang> XemTatCaThongTinDonHang();
     void PrintTTDH(const vector<NodeDonHang>&);
 };

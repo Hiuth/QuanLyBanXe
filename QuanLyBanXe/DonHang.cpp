@@ -1,4 +1,4 @@
-#include "DonHang.h"
+﻿#include "DonHang.h"
 #include "KetNoi.h"
 #include "CheckDuLieu.h"
 #include <iostream>
@@ -11,6 +11,8 @@ Connection* Check_DH = Check_DonHang->CheckDatabase();
 CheckDuLieu* DL_DH = new CheckDuLieu();
 DonHang* DH = new DonHang();
 QuanLyXe* QLX = new QuanLyXe();
+DonHang* orderManager = new DonHang();
+
 DonHang::DonHang() {
     this->head = NULL;
     this->tail = NULL;
@@ -166,4 +168,130 @@ long long TinhTongGiaTriDonHang(const vector<NodeDonHang>& danhSachDonHang) {
 
     return tongGiaTri;
 }
+void DonHang::InputEditOrderInfo()
+{
+    int chon;
+    string MaDonHang, NgayDatHang, NgayGiaoHangDuKien, TrangThaiDonHang, PhuongThucThanhToan, SDTMoi;
+    long long TongGiaTriDonHang;
+    cout << "Nhap ma don hang can sua: "; cin >> MaDonHang;
+    if (DL_DH->CheckOderID(MaDonHang)) {
+        cout << "Chon che do sua " << endl;
+        cout << "1. Sua Ngay Dat Hang" << endl;
+        cout << "2. Sua Ngay Giao Hang Du Kien" << endl;
+        cout << "3. Sua Tong Gia Tri Don Hang" << endl;
+        cout << "4. Sua Trang Thai Don Hang" << endl;
+        cout << "5. Sua Phuong Thuc Thanh Toan" << endl;
+        cout << "6. Sua So Dien Thoai" << endl;
+        cout << " Moi chon: "; cin >> chon;
+        if (chon == 1) {
+            cout << "Ngay Dat Hang moi: "; cin >> NgayDatHang;
+            SuaThongTinDonHang("NgayDatHang", NgayDatHang, MaDonHang);
+        }
+        else if (chon == 2) {
+            cout << "Ngay Giao Hang Du Kien moi: "; cin >> NgayGiaoHangDuKien;
+            SuaThongTinDonHang("NgayGiaoHangDuKien", NgayGiaoHangDuKien, MaDonHang);
+        }
+        else if (chon == 3) {
+            cout << "Tong Gia Tri Don Hang moi: "; cin >> TongGiaTriDonHang;
+            SuaThongTinDonHang("TongGiaTriDonHang", to_string(TongGiaTriDonHang), MaDonHang);
+        }
+        else if (chon == 4) {
+            cout << "Trang Thai Don Hang moi: "; cin >> TrangThaiDonHang;
+            SuaThongTinDonHang("TrangThaiDonHang", TrangThaiDonHang, MaDonHang);
+        }
+        else if (chon == 5) {
+            cin.ignore();
+            cout << "Phuong Thuc Thanh Toan moi: "; getline(cin, PhuongThucThanhToan);
+            SuaThongTinDonHang("PhuongThucThanhToan", PhuongThucThanhToan, MaDonHang);
+        }
+        else if (chon == 6) {
+            cout << "So Dien Thoai moi: "; cin >> SDTMoi;
+            if (DL_DH->CheckSDT(SDTMoi)) {
+                cout << "So dien thoai nay da duoc dang ki voi mot tai khoan khac" << endl;
+            }
+            else {
+                SuaThongTinDonHang("SDT", SDTMoi, MaDonHang);
+            }
+        }
+        else {
+            cout << "Khong co so nao! Vui long nhap lai!" << endl;
+        }
+    }
+    else {
+        cout << "Don Hang khong ton tai! Vui long kiem tra lai! " << endl;
+    }
+}
+
+
+void DonHang::SuaThongTinDonHang(string MaDonHang, string MuonDoiThanh, string ChoCanSua) {
+    try {
+        Statement* stmt = Check_DH->createStatement();
+        string updateQuery = "UPDATE DonHang SET " + ChoCanSua + " = '" + MuonDoiThanh + "' WHERE MaDonHang = '" + MaDonHang + "'";
+        int rows_affected = stmt->executeUpdate(updateQuery);
+        if (rows_affected > 0) {
+            cout << "Cap nhat thong tin don hang thanh cong!" << endl;
+        }
+        else {
+            cout << "Khong tim thay don hang voi ma " << MaDonHang << "!" << endl;
+        }
+        delete stmt;
+    }
+    catch (sql::SQLException& e) {
+        cerr << "SQL Error: " << e.what() << endl;
+}
+
+}vector<NodeDonHang> DonHang::TimKiemThongTinDonHang(string MaDonHang)
+{
+    try {
+        vector<NodeDonHang> OrderInfoSearch;
+        Statement* stmt = Check_DH->createStatement();
+        string SelectData = "SELECT * FROM DonHang WHERE MaDonHang = '" + MaDonHang + "'";
+        ResultSet* res = stmt->executeQuery(SelectData);
+        while (res->next()) {
+            NodeDonHang info(
+                res->getString("MaDonHang"),
+                res->getString("sdt"),
+                res->getString("NgayDatHang"),
+                res->getString("NgayGiaoHangDuKien"),
+                static_cast<long long>(res->getDouble("TongGiaTriDonHang")),
+                res->getString("TrangThaiDonHang"),
+                res->getInt("MaXe"),
+                res->getInt("MaCauHinh"),
+                res->getString("PhuongThucThanhToan")
+            );
+            OrderInfoSearch.push_back(info);
+        }
+        delete stmt;
+        delete res;
+        return OrderInfoSearch;
+    }
+    catch (sql::SQLException& e) {
+        cerr << "SQL Error: " << e.what() << std::endl;
+        return vector<NodeDonHang>(); 
+    }
+}
+void DonHang::InputSearchOrder() {
+    string maDonHang;
+    cout << "Nhap ma don hang can tim: ";
+    cin >> maDonHang;
+    vector<NodeDonHang> orderInfo = TimKiemThongTinDonHang(maDonHang);
+    if (orderInfo.empty()) {
+        cout << "Khong tim thay thong tin cho don hang voi ma " << maDonHang << endl;
+    }
+    else {
+        cout << "Thong tin cho don hang voi ma " << maDonHang << ":\n";
+        for (const auto& order : orderInfo) {
+            cout << "Ma Don Hang: " << order.GetMaDonHang() << endl;
+            cout << "So Dien Thoai: " << order.GetSDT() << endl;
+            cout << "Ngay Dat Hang: " << order.GetNgayDatHang() << endl;
+            cout << "Ngay Giao Hang Du Kien: " << order.GetNgayGiaoHangDuKien() << endl;
+            cout << "Tong Gia Tri Don Hang: " << order.GetTongGiaTriDonHang() << endl;
+            cout << "Trang Thai Don Hang: " << order.GetTrangThaiDonHang() << endl;
+            cout << "Ma Xe: " << order.GetMaXe() << endl;
+            cout << "Ma Cau Hinh: " << order.GetMaCauHinh() << endl;
+            cout << "Phuong Thuc Thanh Toan: " << order.GetPhuongThucThanhToan() << endl;
+        }
+    }
+}
+
 

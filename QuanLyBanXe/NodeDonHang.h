@@ -22,36 +22,35 @@ public:
     NodeDonHang(string, string, string, string, long long, string, int, int, string);
     virtual ~NodeDonHang();
 
-    string GetMaDonHang() { return MaDonHang; }
+    string GetMaDonHang() const { return MaDonHang; }
     void SetMaDonHang(int val) { MaDonHang = val; }
 
-    string GetSDT() { return sdt; }
+    string GetSDT() const { return sdt; }
     void SetSDT(string val) { sdt = val; }
 
-    string GetNgayDatHang() { return NgayDatHang; }
+    string GetNgayDatHang() const { return NgayDatHang; }
     void SetNgayDatHang(string val) { NgayDatHang = val; }
 
-    string GetNgayGiaoHangDuKien() { return NgayGiaoHangDuKien; }
+    string GetNgayGiaoHangDuKien() const { return NgayGiaoHangDuKien; }
     void SetNgayGiaoHangDuKien(string val) { NgayGiaoHangDuKien = val; }
 
-    long long GetTongGiaTriDonHang() { return TongGiaTriDonHang; }
+    long long GetTongGiaTriDonHang() const { return TongGiaTriDonHang; }
     void SetTongGiaTriDonHang(long long val) { TongGiaTriDonHang = val; }
 
-    string GetTrangThaiDonHang() { return TrangThaiDonHang; }
+    string GetTrangThaiDonHang() const { return TrangThaiDonHang; }
     void SetTrangThaiDonHang(string val) { TrangThaiDonHang = val; }
 
-    int GetMaXe() { return MaXe; }
+    int GetMaXe() const { return MaXe; }
     void SetMaXe(int val) { MaXe = val; }
 
-    int GetMaCauHinh() { return MaCauHinh; }
+    int GetMaCauHinh() const { return MaCauHinh; }
     void SetMaCauHinh(int val) { MaCauHinh = val; }
 
-    string GetPhuongThucThanhToan() { return PhuongThucThanhToan; }
+    string GetPhuongThucThanhToan() const { return PhuongThucThanhToan; }
     void SetPhuongThucThanhToan(string val) { PhuongThucThanhToan = val; }
 
-    NodeDonHang* GetPointer() { return pointer; }
+    NodeDonHang* GetPointer() const { return pointer; }
     void SetPointer(NodeDonHang* val) { pointer = val; }
 
-    long long GetTongGiaTriDonHang() const { return TongGiaTriDonHang; }
 };
 
