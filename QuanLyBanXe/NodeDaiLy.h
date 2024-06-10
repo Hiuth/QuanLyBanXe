@@ -6,8 +6,11 @@ private:
 	string TenDaiLy;
 	string DiaChi;
 	string SDTDaiLy;
+	string Quan;
+	string ThanhPho;
+	NodeDaiLy* pointer;
 public:
-	NodeDaiLy(string, string, string);
+	NodeDaiLy(string, string, string,string,string);
 	virtual ~NodeDaiLy();
 
 	string LayTenDaiLy() { return TenDaiLy; }
@@ -18,5 +21,15 @@ public:
 
 	string LaySDTDaiLy() { return SDTDaiLy; }
 	void CaiDatSDT(string val) { SDTDaiLy = val; }
+
+	string LayThanhPho() { return ThanhPho; }
+	void CaiDatThanhPho(string val) { ThanhPho = val; }
+
+	string LayQuan() { return Quan; }
+	void CaiDatQuan(string val) { Quan = val; }
+
+	NodeDaiLy* GetPointer() { return pointer; }
+	void SetPointer(NodeDaiLy* val) { pointer = val; }
+
 };
 
