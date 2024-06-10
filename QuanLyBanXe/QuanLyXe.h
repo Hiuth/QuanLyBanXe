@@ -23,8 +23,8 @@ public:
 	void SuaCauHinhXe(string,string,string);
 
 	void Xoa();
-	void XoaThongTinXe(string);
-	void XoaCauHinhXe(string);
+	void XoaThongTinXe(string);//quan tri
+	void XoaCauHinhXe(string);//quan tri
 
 	vector<NodeXe> XemThongTinXe();// Xem toàn bộ thông tin xe
 	//*tồn kho chỉ có quản trị được xem, người dùng không xem được 
