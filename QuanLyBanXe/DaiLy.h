@@ -15,11 +15,10 @@ public:
     void ThemThongTinDaiLy(NodeDaiLy*);
     void XoaThongTinDaiLy(std::string);
     void InputEditDaiLyInfo();
-    void SuaThongTinDaiLy(string, string, string, string, string);
-    std::vector<NodeDaiLy> TimKiemThongTinDaiLy( string,string);
+    void SuaThongTinDaiLy(std::string, std::string, std::string, std::string, std::string, std::string);
+    void NhapThongTinDaiLyCanTim();
+    std::vector<NodeDaiLy> TimKiemThongTinDaiLy(std::string DiaChi, std::string ThanhPho, std::string Quan);
     std::vector<NodeDaiLy> XemTatCaThongTinDaiLy();
-    void InTTDL( vector<NodeDaiLy>);
+    void InTTDL(std::vector<NodeDaiLy>);
     void TestAnh();
 };
-
-
