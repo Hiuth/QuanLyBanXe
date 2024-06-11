@@ -295,4 +295,18 @@ bool CheckDuLieu::CheckOderID(string OrderID)
     delete stmt;
 }
 
+bool CheckDuLieu::check_StoreID(string thanhpho, string quan)
+{
+    Statement* stmt;
+    stmt = Check_DL->createStatement();
+    string SelectData = "Select *from Store where City = '" + thanhpho + "' and distric = '"+quan+"'";
+    ResultSet* res = stmt->executeQuery(SelectData);
+    while (res->next()) {
+        return true;
+    }
+    return false;
+    delete res;
+    delete stmt;
+}
+
 

@@ -17,8 +17,9 @@ public:
 	virtual ~QuanLyDVvaCSKH();
 
 	void NhapThongTinYeuCauHoTro();// dành cho người dùng
-	void XemTrangThaiYeuCauHoTro();//Quản trị và người dùng đều xem được
-	void PhanHoiYeuCauHoTro(); //dành cho quản trị
+	void PhanHoi();
+	vector<NodeHoTro> XemTrangThaiYeuCauHoTro(string);//dành cho quản trị
+	void PhanHoiYeuCauHoTro(string); //dành cho quản trị
 	void YeuCauDichVuHoTro(NodeHoTro*);
 
 	void NhapThongTinLichHen();

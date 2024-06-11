@@ -16,7 +16,7 @@ public:
     void XoaThongTinDaiLy(std::string);
     void InputEditDaiLyInfo();
     void SuaThongTinDaiLy(string, string, string, string, string);
-    std::vector<NodeDaiLy> TimKiemThongTinDaiLy( string);
+    std::vector<NodeDaiLy> TimKiemThongTinDaiLy( string,string);
     std::vector<NodeDaiLy> XemTatCaThongTinDaiLy();
     void InTTDL( vector<NodeDaiLy>);
     void TestAnh();

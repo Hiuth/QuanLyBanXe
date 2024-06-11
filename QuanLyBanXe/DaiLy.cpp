@@ -49,7 +49,7 @@ void DaiLy::ThemThongTinDaiLy(NodeDaiLy* p)
             SDTDaiLy = p->LaySDTDaiLy();
             Quan = p->LayQuan();
             ThanhPho = p->LayThanhPho();
-            string UpdateTableAccount = "insert into DaiLy  Values ('" + TenDaiLy + "','" + DiaChi + "','" + SDTDaiLy + "','" + Quan + "','" + ThanhPho + "');";
+            string UpdateTableAccount = "insert into DaiLy(storename, city,distric,address,phonenumber)  Values ('" + TenDaiLy + "','" + DiaChi + "','" + SDTDaiLy + "','" + Quan + "','" + ThanhPho + "');";
             stmt->execute(UpdateTableAccount);
             cout << "Du lieu da duoc cap nhat!" << endl;
         }
@@ -65,20 +65,21 @@ void DaiLy::ThemThongTinDaiLy(NodeDaiLy* p)
         cerr << "SQL Error: " << e.what() << std::endl;
     }
 }
-vector<NodeDaiLy> DaiLy::TimKiemThongTinDaiLy(string MaDaiLy)
+vector<NodeDaiLy> DaiLy::TimKiemThongTinDaiLy(string ThanhPho,string Quan)
 {
     try {
         vector<NodeDaiLy> DaiLyInfoSearch;
         Statement* stmt = Check_DL->createStatement();
-        string SelectData = "SELECT * FROM DaiLy WHERE MaDaiLy = '" + MaDaiLy + "'";
+        string SelectData = "SELECT * FROM DaiLy WHERE City = '" + ThanhPho + "' and distric = '"+Quan+"'";
         ResultSet* res = stmt->executeQuery(SelectData);
         while (res->next()) {
-            NodeDaiLy info(               
-                res->getString("TenDaiLy"),
-                res->getString("SDT"),
-                res->getString("DiaChi"),
-                res->getString("Email"),
-                res->getString("LoaiDaiLy")
+            NodeDaiLy info(
+                res->getString("StoreID"),
+                res->getString("StoreName"),
+                res->getString("City"),
+                res->getString("Distric"),
+                res->getString("Address"),
+                res->getString("Phonenumber")
             );
             DaiLyInfoSearch.push_back(info);
         }

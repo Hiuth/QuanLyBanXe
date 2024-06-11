@@ -1,7 +1,8 @@
 ﻿#include "QuanLyDVvaCSKH.h"
 KetNoi* Check_DVandCSKH = new KetNoi();
 Connection* Check_DV = Check_DVandCSKH->CheckDatabase();
-QuanLyXe* QL_DV = new QuanLyXe();
+QuanLyXe* QL_LX = new QuanLyXe();
+QuanLyDVvaCSKH* DV_CSKH = new QuanLyDVvaCSKH();
 CheckDuLieu* DL_DV = new CheckDuLieu();
 NodeDaiLy* DaiLy;
 NodeHoTro* HoTro;
@@ -24,15 +25,55 @@ QuanLyDVvaCSKH::~QuanLyDVvaCSKH()
 
 void QuanLyDVvaCSKH::NhapThongTinYeuCauHoTro()
 {
-
+    string email, sdt, mota, trangthai;
+    trangthai = "ChuaXuLy";
+    cout << "Nhap email: "; getline(cin, email);
+    cout << "Nhap so dien thoai: "; cin >> sdt;
+    cin.ignore();
+    cout << "Nhap mo ta: "; getline(cin, mota);
+    HoTro = new NodeHoTro(email,sdt,mota,trangthai);
+    DV_CSKH->YeuCauDichVuHoTro(HoTro);
 }
 
-void QuanLyDVvaCSKH::XemTrangThaiYeuCauHoTro()
+void QuanLyDVvaCSKH::PhanHoi()
 {
+    string email,trangthai;
+    cout << "Nhap tai khoan muon phan hoi: "; cin >> email;
+    DV_CSKH->PhanHoiYeuCauHoTro(email);
 }
 
-void QuanLyDVvaCSKH::PhanHoiYeuCauHoTro()
+
+/*trạng thái có 2 dạng: Đang xử lý và đã xử lý*/
+vector<NodeHoTro> QuanLyDVvaCSKH::XemTrangThaiYeuCauHoTro(string trangthai)
 {
+    vector<NodeHoTro> HoTro;
+    Statement* stmt;
+    stmt = Check_DV->createStatement();
+    string SelectData = "Select *from YeuCauHoTro where TrangThai = '" + trangthai + "'";
+    ResultSet* res = stmt->executeQuery(SelectData);
+    while (res->next()) {
+        NodeHoTro HT(res->getString("UserEmail"), res->getString("SoDienThoai"), res->getString("MoTa"), res->getString("TrangThai"));
+        HoTro.push_back(HT);
+    }
+    delete stmt;
+    delete res;
+    return HoTro;
+}
+
+
+void QuanLyDVvaCSKH::PhanHoiYeuCauHoTro(string email)// sửa trạng thái yêu cầu hỗ trợ
+{
+    try {
+        Statement* stmt;
+        string capnhat = "DaXuLy";
+        stmt = Check_DV->createStatement();
+        string SelectData = "UPDATE YeuCauHoTro SET TrangThai = '" +capnhat+ "' WHERE UserEmail = '" + email + "'";
+        int rows_affected = stmt->executeUpdate(SelectData);
+        delete stmt;
+    }
+    catch (sql::SQLException& e) {
+        cerr << "SQL Error: " << e.what() << std::endl;
+    }
 }
 
 void QuanLyDVvaCSKH::YeuCauDichVuHoTro(NodeHoTro* p)
@@ -73,6 +114,16 @@ void QuanLyDVvaCSKH::YeuCauDichVuHoTro(NodeHoTro* p)
 
 void QuanLyDVvaCSKH::NhapThongTinLichHen()
 {
+    string NgayHen,ThoiGianHen,LoaiDichVu,BienSo,MaXe,SDT,MaDaiLy,email, thanhpho,quan;
+    cout << "Nhap vao ngay hen: "; cin >> NgayHen;
+    cout << "Nhap thoi gian hen: "; cin >> ThoiGianHen;
+    cout << "Nhap loai dich vu: "; getline(cin, LoaiDichVu);
+    cout << "Nhap bien so xe: "; getline(cin, BienSo);
+    cout << "Nhap loai xe: "; cin >> MaXe;
+    cout << "Nhap so dien thoai: "; cin >> SDT;
+    cout << "Nhap thanh pho: "; getline(cin, thanhpho);
+    cout << "Nhap quan: "; getline(cin, quan);
+
 }
 
 void QuanLyDVvaCSKH::DatLichHenBaoDuong(NodeLHBaoDuong* p)

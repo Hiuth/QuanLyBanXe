@@ -31,5 +31,7 @@ public:
 	bool Check_CarName(string);
 
 	bool CheckOderID(string);
+
+	bool check_StoreID(string, string);
 };
 
