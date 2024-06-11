@@ -33,5 +33,14 @@ public:
 	bool CheckOderID(string);
 
 	bool check_StoreID(string, string);
+
+	int Count_MangerAcc();
+	int Count_UserAcc();
+	int Count_Store();
+	int Count_Car();
+	int Count_CarConfiguration();
+	int Count_Customer();
+	int Count_Order();
+	int Count_RequestAssistance();
 };
 

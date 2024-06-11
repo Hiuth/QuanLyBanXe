@@ -7,6 +7,7 @@ Connection* Check_tk = Check_TaiKhoanQuanTri->CheckDatabase();
 NodeTaiKhoanQuanTri* TKQT;
 NodeTaiKhoanKhachHang* TKKH;
 NodeKhachHang* KH;
+KhachHang* Khach_ = new KhachHang();
 TaiKhoanQuanTri* QT = new TaiKhoanQuanTri();
 CheckDuLieu* DL = new CheckDuLieu();
 
@@ -257,12 +258,24 @@ void TaiKhoanQuanTri::XoaTaiKhoanQuanTri(string xoa)
 
 void TaiKhoanQuanTri::XoaTaiKhoanKhachHang(string xoa)
 {
+    vector<NodeKhachHang> check;
+    string sdt;
     Statement* stmt;
     stmt = Check_tk->createStatement();
+    check = Khach_->TimKiemThongTinKhachHang(xoa);
+    sdt = check[0].GetPhoneNumber();
     string SelectData = "Delete from UserAccount where UserEmail = '" + xoa + "'";
     string SelectData2 = "Delete from KhachHang where UserEmail = '" + xoa + "'";
-    int rows_affected = stmt->executeUpdate(SelectData);
+    string SelectData3 = "Delete from LICHHENBAODUONG where UserEmail = '" + xoa + "'";
+    string SelectData4 = "Delete from YEUCAUHOTRO where UserEmail = '" + xoa + "'";
+    string SelectData5 = "Delete from DonHang where SDT = '" + sdt + "'";
+    string SelectData6 = "Delete from GioHang where UserEmail = '" + xoa + "'";
+    stmt->executeUpdate(SelectData5);
+    stmt->executeUpdate(SelectData6);
+    stmt->executeUpdate(SelectData4);
+    stmt->executeUpdate(SelectData3);
     stmt->executeUpdate(SelectData2);
+    stmt->executeUpdate(SelectData);
    // string call = "CALL UpdateManagerIDs();";
     //   stmt->execute(call);
     delete stmt;

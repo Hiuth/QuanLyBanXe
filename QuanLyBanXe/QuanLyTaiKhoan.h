@@ -2,6 +2,7 @@
 #include"NodeTaiKhoanQuanTri.h"
 #include"NodeTaiKhoanKhachHang.h"
 #include"NodeKhachHang.h"
+#include"QuanLyKhachHang.h"
 class TaiKhoanQuanTri
 {
 private:
@@ -42,7 +43,5 @@ public:
 	void PrintQT(vector<NodeTaiKhoanQuanTri>);
 	void PrintTKKH(vector<NodeTaiKhoanKhachHang>);
 	void PrintTTKH(vector<NodeKhachHang>);
-
-	void testanh();
 };
 

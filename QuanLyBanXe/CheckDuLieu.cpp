@@ -309,4 +309,124 @@ bool CheckDuLieu::check_StoreID(string thanhpho, string quan)
     delete stmt;
 }
 
+int CheckDuLieu::Count_MangerAcc()
+{
+    int count = 0;
+    Statement* stmt;
+    stmt = Check_DL->createStatement();
+    string SelectData = "Select *from ManagerAccount";
+    ResultSet* res = stmt->executeQuery(SelectData);
+    while (res->next()) {
+        count++;
+    }
+    return count;
+    delete res;
+    delete stmt;
+}
+
+int CheckDuLieu::Count_UserAcc()
+{
+    int count = 0;
+    Statement* stmt;
+    stmt = Check_DL->createStatement();
+    string SelectData = "Select *from UserAccount";
+    ResultSet* res = stmt->executeQuery(SelectData);
+    while (res->next()) {
+        count++;
+    }
+    return count;
+    delete res;
+    delete stmt;
+}
+
+int CheckDuLieu::Count_Store()
+{
+    int count = 0;
+    Statement* stmt;
+    stmt = Check_DL->createStatement();
+    string SelectData = "Select *from Store";
+    ResultSet* res = stmt->executeQuery(SelectData);
+    while (res->next()) {
+        count++;
+    }
+    return count;
+    delete res;
+    delete stmt;
+}
+
+int CheckDuLieu::Count_Car()
+{
+    int count = 0;
+    Statement* stmt;
+    stmt = Check_DL->createStatement();
+    string SelectData = "Select *from XEVINFAST";
+    ResultSet* res = stmt->executeQuery(SelectData);
+    while (res->next()) {
+        count++;
+    }
+    return count;
+    delete res;
+    delete stmt;
+}
+
+int CheckDuLieu::Count_CarConfiguration()
+{
+    int count = 0;
+    Statement* stmt;
+    stmt = Check_DL->createStatement();
+    string SelectData = "Select *from CauHinhXe";
+    ResultSet* res = stmt->executeQuery(SelectData);
+    while (res->next()) {
+        count++;
+    }
+    return count;
+    delete res;
+    delete stmt;
+}
+
+int CheckDuLieu::Count_Customer()
+{
+    int count = 0;
+    Statement* stmt;
+    stmt = Check_DL->createStatement();
+    string SelectData = "Select *from KhachHang";
+    ResultSet* res = stmt->executeQuery(SelectData);
+    while (res->next()) {
+        count++;
+    }
+    return count;
+    delete res;
+    delete stmt;
+}
+
+int CheckDuLieu::Count_Order()
+{
+    int count = 0;
+    Statement* stmt;
+    stmt = Check_DL->createStatement();
+    string SelectData = "Select *from DonHang";
+    ResultSet* res = stmt->executeQuery(SelectData);
+    while (res->next()) {
+        count++;
+    }
+    return count;
+    delete res;
+    delete stmt;
+}
+
+int CheckDuLieu::Count_RequestAssistance()
+{
+    int count = 0;
+    Statement* stmt;
+    stmt = Check_DL->createStatement();
+    string SelectData = "Select *from YeuCauHoTro";
+    ResultSet* res = stmt->executeQuery(SelectData);
+    while (res->next()) {
+        count++;
+    }
+    return count;
+    delete res;
+    delete stmt;
+}
+
 
