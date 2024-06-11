@@ -1,12 +1,14 @@
 ﻿#include "QuanLyDVvaCSKH.h"
+#include"DaiLy.h"
 KetNoi* Check_DVandCSKH = new KetNoi();
 Connection* Check_DV = Check_DVandCSKH->CheckDatabase();
 QuanLyXe* QL_LX = new QuanLyXe();
 QuanLyDVvaCSKH* DV_CSKH = new QuanLyDVvaCSKH();
 CheckDuLieu* DL_DV = new CheckDuLieu();
-NodeDaiLy* DaiLy;
+NodeDaiLy* Dly;
 NodeHoTro* HoTro;
 NodeLHBaoDuong* BD;
+DaiLy* cuahang = new DaiLy();
 
 QuanLyDVvaCSKH::QuanLyDVvaCSKH()
 {
@@ -114,16 +116,22 @@ void QuanLyDVvaCSKH::YeuCauDichVuHoTro(NodeHoTro* p)
 
 void QuanLyDVvaCSKH::NhapThongTinLichHen()
 {
+    vector<NodeDaiLy> check;
     string NgayHen,ThoiGianHen,LoaiDichVu,BienSo,MaXe,SDT,MaDaiLy,email, thanhpho,quan;
     cout << "Nhap vao ngay hen: "; cin >> NgayHen;
     cout << "Nhap thoi gian hen: "; cin >> ThoiGianHen;
+    cin.ignore();
     cout << "Nhap loai dich vu: "; getline(cin, LoaiDichVu);
     cout << "Nhap bien so xe: "; getline(cin, BienSo);
     cout << "Nhap loai xe: "; cin >> MaXe;
     cout << "Nhap so dien thoai: "; cin >> SDT;
+    cout << "Nhap email: "; cin >> email;
+    cin.ignore();
     cout << "Nhap thanh pho: "; getline(cin, thanhpho);
     cout << "Nhap quan: "; getline(cin, quan);
-
+    check = cuahang->TimKiemThongTinDaiLy(thanhpho,quan);
+    MaDaiLy = check[0].LayMaDaiLy();
+    BD = new NodeLHBaoDuong(NgayHen, ThoiGianHen, LoaiDichVu, BienSo, MaXe, SDT, MaDaiLy,email);
 }
 
 void QuanLyDVvaCSKH::DatLichHenBaoDuong(NodeLHBaoDuong* p)

@@ -5,7 +5,7 @@
 #include <iostream>
 
 KetNoi* Check_DaiLy = new KetNoi();
-Connection* Check_DL = Check_DaiLy->CheckDatabase();
+Connection* Check_DLy = Check_DaiLy->CheckDatabase();
 NodeDaiLy* N_DL;
 DaiLy* DAILY = new DaiLy();
 CheckDuLieu* DL_DaiLy = new CheckDuLieu();
@@ -38,7 +38,7 @@ void DaiLy::ThemThongTinDaiLy(NodeDaiLy* p)
     try {
 
         Statement* stmt;
-        stmt = Check_DL->createStatement();
+        stmt = Check_DLy->createStatement();
         string TenBang = "DaiLy";
         string KiemTra = "show tables like'" + TenBang + "'";
         ResultSet* result = stmt->executeQuery(KiemTra);
@@ -69,7 +69,7 @@ vector<NodeDaiLy> DaiLy::TimKiemThongTinDaiLy(string ThanhPho,string Quan)
 {
     try {
         vector<NodeDaiLy> DaiLyInfoSearch;
-        Statement* stmt = Check_DL->createStatement();
+        Statement* stmt = Check_DLy->createStatement();
         string SelectData = "SELECT * FROM DaiLy WHERE City = '" + ThanhPho + "' and distric = '"+Quan+"'";
         ResultSet* res = stmt->executeQuery(SelectData);
         while (res->next()) {
