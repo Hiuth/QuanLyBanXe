@@ -131,7 +131,9 @@ void QuanLyDVvaCSKH::NhapThongTinLichHen()
     cout << "Nhap quan: "; getline(cin, quan);
     check = cuahang->TimKiemThongTinDaiLy(thanhpho,quan);
     MaDaiLy = check[0].LayMaDaiLy();
+    cout << MaDaiLy << endl;
     BD = new NodeLHBaoDuong(NgayHen, ThoiGianHen, LoaiDichVu, BienSo, MaXe, SDT, MaDaiLy,email);
+    DV_CSKH->DatLichHenBaoDuong(BD);
 }
 
 void QuanLyDVvaCSKH::DatLichHenBaoDuong(NodeLHBaoDuong* p)
@@ -161,7 +163,7 @@ void QuanLyDVvaCSKH::DatLichHenBaoDuong(NodeLHBaoDuong* p)
             SDT = p->LaySoDienThoai();
             MaDaiLy = p->LayMaCuaHang();
             email = p->LayTaiKhoanKhachHang();
-            string UpdateTableAccount = "insert into CauHinhXe Values ('" + NgayHen + "','" + ThoiGianHen + "','" + LoaiDichVu + "','" +BienSo + "','" + MaXe + "','" + SDT + "','" + MaDaiLy + "','" + email + "');";
+            string UpdateTableAccount = "insert into LICHHENBAODUONG (ngayhen, thoigianhen, loaidichvu, bienso,maxe,sdt, storeid, useremail) Values ('" + NgayHen + "','" + ThoiGianHen + "','" + LoaiDichVu + "','" +BienSo + "','" + MaXe + "','" + SDT + "','" + MaDaiLy + "','" + email + "');";
             stmt->execute(UpdateTableAccount);
             cout << "Du lieu da duoc cap nhat!" << endl;
         }

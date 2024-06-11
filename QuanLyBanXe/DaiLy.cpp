@@ -70,14 +70,14 @@ vector<NodeDaiLy> DaiLy::TimKiemThongTinDaiLy(string ThanhPho,string Quan)
     try {
         vector<NodeDaiLy> DaiLyInfoSearch;
         Statement* stmt = Check_DLy->createStatement();
-        string SelectData = "SELECT * FROM DaiLy WHERE City = '" + ThanhPho + "' and distric = '"+Quan+"'";
+        string SelectData = "SELECT * FROM Store WHERE City = '" + ThanhPho + "' and distric = '"+Quan+"'";
         ResultSet* res = stmt->executeQuery(SelectData);
         while (res->next()) {
             NodeDaiLy info(
-                res->getString("StoreID"),
+                to_string(res->getInt("StoreID")),
                 res->getString("StoreName"),
                 res->getString("City"),
-                res->getString("Distric"),
+                res->getString("distric"),
                 res->getString("Address"),
                 res->getString("Phonenumber")
             );
