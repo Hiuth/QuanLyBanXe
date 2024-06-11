@@ -7,7 +7,6 @@
 
 using namespace std;
 
-// External pointers
 KetNoi* Check_DaiLy = new KetNoi();
 Connection* Check_DLy = Check_DaiLy->CheckDatabase();
 NodeDaiLy* N_DL;
@@ -121,7 +120,7 @@ void DaiLy::NhapThongTinDaiLyCanTim()
     vector<NodeDaiLy> result = TimKiemThongTinDaiLy(DiaChi, ThanhPho, Quan);
     InTTDL(result);
 }
-vector<NodeDaiLy> DaiLy::TimKiemThongTinDaiLy(string DiaChi, string ThanhPho, string Quan) // Update function definition
+vector<NodeDaiLy> DaiLy::TimKiemThongTinDaiLy(string DiaChi, string ThanhPho, string Quan) 
 {
     try {
         vector<NodeDaiLy> DaiLyInfoSearch;
