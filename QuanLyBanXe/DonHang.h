@@ -2,6 +2,7 @@
 #include"NodeDonHang.h"
 #include"NodeXe.h"
 #include"NodeCauHinhXe.h"
+#include"NodeDaiLy.h"
 #include"QuanLyXe.h"
 using namespace std;
 
@@ -24,6 +25,6 @@ public:
     void SuaThongTinDonHang(string, string, string);
     vector<NodeDonHang> TimKiemThongTinDonHang(string);
     vector<NodeDonHang> XemTatCaThongTinDonHang();
-    void PrintTTDH(const vector<NodeDonHang>&);
+    void PrintTTDH( vector<NodeDonHang>);
 };
 

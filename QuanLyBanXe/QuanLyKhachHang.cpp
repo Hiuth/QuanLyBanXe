@@ -173,6 +173,21 @@ void KhachHang::SuaThongTinKhachHang(string ChoCanSua, string MuonDoiThanh, stri
         Statement* stmt;
         stmt = Check_KH->createStatement();
         string SelectData = "UPDATE KhachHang SET " + ChoCanSua + " = '" + MuonDoiThanh + "' WHERE SDT = '" + SDT + "'";
+        delete stmt;
+    }
+    catch (sql::SQLException& e) {
+        cerr << "SQL Error: " << e.what() << std::endl;
+    }
+}
+void KhachHang::SuaThongTinKhachHangMatTK(string ChoCanSua, string MuonDoiThanh, string Email)
+{
+    try {
+        Statement* stmt;
+        stmt = Check_KH->createStatement();
+        string SelectData = "UPDATE KhachHang SET " + ChoCanSua + " = '" + MuonDoiThanh + "' WHERE UserEmail = '" + Email + "'";
+        string SelectData2 = "UPDATE LICHHENBAODUONG SET " + ChoCanSua + " = '" + MuonDoiThanh + "' WHERE UserEmail = '" + Email + "'";
+        string SelectData3 = "UPDATE GioHang SET " + ChoCanSua + " = '" + MuonDoiThanh + "' WHERE UserEmail = '" + Email + "'";
+        string SelectData4 = "UPDATE YeuCauHoTro SET " + ChoCanSua + " = '" + MuonDoiThanh + "' WHERE UserEmail = '" + Email + "'";
         int rows_affected = stmt->executeUpdate(SelectData);
         delete stmt;
     }

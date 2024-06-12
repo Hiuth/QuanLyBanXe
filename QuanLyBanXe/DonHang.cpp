@@ -3,6 +3,7 @@
 #include "CheckDuLieu.h"
 #include <iostream>
 #include <string>
+#include"DaiLy.h"
 
 using namespace std;
 
@@ -12,6 +13,7 @@ CheckDuLieu* DL_DH = new CheckDuLieu();
 DonHang* DH = new DonHang();
 QuanLyXe* QLX = new QuanLyXe();
 DonHang* orderManager = new DonHang();
+DaiLy* Dai = new DaiLy();
 
 DonHang::DonHang() {
     this->head = NULL;
@@ -23,35 +25,38 @@ DonHang::~DonHang() {
 }
 
 void DonHang::NhapDuLieuThongTinDonHang() {
-    int MaXe, MaCauHinh;
-    string  MaDonHang, sdt, NgayDatHang, NgayGiaoHangDuKien, TrangThaiDonHang, PhuongThucThanhToan;
+    string  MaDonHang, sdt, NgayDatHang, NgayGiaoHangDuKien, TrangThaiDonHang, PhuongThucThanhToan, storeID, MaXe, MaCauHinh, MauXe,LoaiPin,thanhpho, quan;
     long long TongGiaTriDonHang;
-
-    cout << "Nhap Ma Don Hang: "; cin >> MaDonHang;
-    if (DL_DH->CheckOderID(MaDonHang)) {
-        cout << "Ma Don Hang da ton tai! Vui long kiem tra lai." << endl;
-    }
-    else {
+    vector<NodeCauHinhXe> cauhinh;
+    vector<NodeDaiLy> dl;
         cin.ignore();
         cout << "Nhap So Dien Thoai: "; getline(cin, sdt);
         if (DL_DH->CheckSDT(sdt)) {
-            cout << "So Dien Thoai da ton tai! Vui long kiem tra lai." << endl;
-        }
-        else {
             cout << "Ngay Dat Hang: "; cin >> NgayDatHang;
             cout << "Ngay Giao Hang Du Kien: "; cin >> NgayGiaoHangDuKien;
-            cout << "Tong Gia Tri Don Hang: "; cin >> TongGiaTriDonHang;
             cout << "Trang Thai Don Hang: "; cin >> TrangThaiDonHang;
             cout << "Ma Xe: "; cin >> MaXe;
-            cout << "Ma Cau Hinh: "; cin >> MaCauHinh;
+            cin.ignore();
+            cout << "Nhap vao mau sac: "; getline(cin, MauXe);
+            cout << "Nhap vao loai pin: "; cin >> LoaiPin;
+            cauhinh = QLX->TimMaCauHinh(MaXe, MauXe, LoaiPin);
+            MaCauHinh = cauhinh[0].LayMaCauhinhXe();
+            cout << MaCauHinh << endl;
+            TongGiaTriDonHang = DH->TongGiaTriDonHang(MaXe, MauXe, LoaiPin);
+            cin.ignore();
+            cout << "Nhap thanh pho: "; getline(cin, thanhpho);
+            cout << "Nhap quan: "; getline(cin, quan);
+            dl = Dai->TimKiemThongTinDaiLy(thanhpho, quan);
+            storeID = dl[0].LayMaDaiLy();
             cin.ignore();
             cout << "Phuong Thuc Thanh Toan: "; getline(cin, PhuongThucThanhToan);
-
-            NodeDonHang* newDonHang = new NodeDonHang(MaDonHang, sdt, NgayDatHang, NgayGiaoHangDuKien, TongGiaTriDonHang, TrangThaiDonHang, MaXe, MaCauHinh, PhuongThucThanhToan);
+            NodeDonHang* newDonHang = new NodeDonHang(sdt, MaCauHinh, MaXe, NgayDatHang, NgayGiaoHangDuKien, TongGiaTriDonHang, TrangThaiDonHang, PhuongThucThanhToan, storeID);
             ThemThongTinDonHang(newDonHang);
             cout << "Nhap don hang thanh cong!" << endl;
         }
-    }
+        else {
+            cout << "So Dien Thoai khong ton tai! Vui long kiem tra lai." << endl;
+        }
 }
 
 
@@ -61,7 +66,6 @@ void DonHang::ThemThongTinDonHang(NodeDonHang* p) {
         string TenBang = "DonHang";
         string KiemTra = "SHOW TABLES LIKE '" + TenBang + "'";
         ResultSet* result = stmt->executeQuery(KiemTra);
-
         if (result->next()) {
             string MaDonHang = p->GetMaDonHang();
             string sdt = p->GetSDT();
@@ -69,11 +73,12 @@ void DonHang::ThemThongTinDonHang(NodeDonHang* p) {
             string NgayGiaoHangDuKien = p->GetNgayGiaoHangDuKien();
             long long TongGiaTriDonHang = p->GetTongGiaTriDonHang();
             string TrangThaiDonHang = p->GetTrangThaiDonHang();
-            int MaXe = p->GetMaXe();
-            int MaCauHinh = p->GetMaCauHinh();
+            string MaXe = p->GetMaXe();
+            string MaCauHinh = p->GetMaCauHinh();
             string PhuongThucThanhToan = p->GetPhuongThucThanhToan();
-            string UpdateTableOder = "INSERT INTO DonHang (MaDonHang, sdt, NgayDatHang, NgayGiaoHangDuKien, TongGiaTriDonHang, TrangThaiDonHang, MaXe, MaCauHinh, PhuongThucThanhToan) "
-                "VALUES ('" + (MaDonHang)+"', '" + sdt + "', '" + NgayDatHang + "', '" + NgayGiaoHangDuKien + "', '" + to_string(TongGiaTriDonHang) + "', '" + TrangThaiDonHang + "', '" + to_string(MaXe) + "', '" + to_string(MaCauHinh) + "', '" + PhuongThucThanhToan + "')";
+            string StoreID = p->LayMaCuaHang();
+            string UpdateTableOder = "INSERT INTO DonHang (sdt, MaCauHinh, MaXe, NgayDatHang, NgayGiaoHangDuKien, TongGiaTriDonHang, TrangThaiDonHang, PhuongThucThanhToan,storeID) "
+                "VALUES ('" + sdt + "', '" + MaCauHinh + "', '" + MaXe + "', '"+NgayDatHang+ "', '" + NgayGiaoHangDuKien + "', '" +to_string(TongGiaTriDonHang)+ "', '" +TrangThaiDonHang+ "', '" + PhuongThucThanhToan + "','"+StoreID+"')";
             stmt->execute(UpdateTableOder);
             cout << "Du lieu da duoc cap nhat!" << endl;
         }
@@ -136,29 +141,43 @@ void DonHang::XoaThongTinDonHang(string maDonHang)
     delete stmt;
 }
 vector<NodeDonHang> DonHang::XemTatCaThongTinDonHang() {
-    vector<NodeDonHang> danhSachDonHang;
-    Statement* stmt;
-    stmt = Check_DH->createStatement();
-    string selectQuery = "SELECT * FROM DonHang";
-    ResultSet* res = stmt->executeQuery(selectQuery);
-    while (res->next()) {
-        NodeDonHang donHang(
-            res->getString("MaDonHang"),
-            res->getString("sdt"),
-            res->getString("NgayDatHang"),
-            res->getString("NgayGiaoHangDuKien"),
-            static_cast<long long>(res->getDouble("TongGiaTriDonHang")),
-            res->getString("TrangThaiDonHang"),
-            res->getInt("MaXe"),
-            res->getInt("MaCauHinh"),
-            res->getString("PhuongThucThanhToan")
-        );
-        danhSachDonHang.push_back(donHang);
+    try {
+        vector<NodeDonHang> danhSachDonHang;
+        Statement* stmt;
+        stmt = Check_DH->createStatement();
+        string selectQuery = "SELECT * FROM DonHang";
+        ResultSet* res = stmt->executeQuery(selectQuery);
+        while (res->next()) {
+            NodeDonHang donHang(
+                to_string(res->getInt("MaDonHang")),
+                res->getString("SDT"),
+                to_string(res->getInt("MaCauHinh")),
+                res->getString("MaXe"),
+                res->getString("NgayDatHang"),
+                res->getString("NgayGiaoHangDuKien"),
+                static_cast<long long>(res->getDouble("TongGiaTriDonHang")),
+                res->getString("TrangThaiDonHang"),
+                res->getString("PhuongThucThanhToan"),
+                to_string(res->getInt("storeID"))
+            );
+            danhSachDonHang.push_back(donHang);
+        }
+        delete stmt;
+        delete res;
+        return danhSachDonHang;
     }
-    delete stmt;
-    delete res;
-    return danhSachDonHang;
+    catch (sql::SQLException& e) {
+        cerr << "SQL Error: " << e.what() << std::endl;
+    }
+
 }
+void DonHang::PrintTTDH( vector<NodeDonHang> check)
+{
+    for (int i = 0; i < check.size(); i++) {
+        cout << check[i].GetMaDonHang() << "\t" <<check[i].GetSDT()<<"\t" << check[i].GetMaXe() << "\t" << check[i].GetMaCauHinh() << "\t" << check[i].GetNgayDatHang() << "\t" << check[i].GetNgayGiaoHangDuKien() << "\t" << check[i].GetTongGiaTriDonHang() << "\t" << check[i].GetPhuongThucThanhToan() << endl;
+    }
+}
+
 long long TinhTongGiaTriDonHang(const vector<NodeDonHang>& danhSachDonHang) {
     long long tongGiaTri = 0;
 
@@ -249,15 +268,16 @@ void DonHang::SuaThongTinDonHang(string MaDonHang, string MuonDoiThanh, string C
         ResultSet* res = stmt->executeQuery(SelectData);
         while (res->next()) {
             NodeDonHang info(
-                res->getString("MaDonHang"),
+                to_string(res->getInt("MaDonHang")),
                 res->getString("sdt"),
+                to_string(res->getInt("MaCauHinh")),
+                to_string(res->getInt("MaXe")),
                 res->getString("NgayDatHang"),
                 res->getString("NgayGiaoHangDuKien"),
                 static_cast<long long>(res->getDouble("TongGiaTriDonHang")),
                 res->getString("TrangThaiDonHang"),
-                res->getInt("MaXe"),
-                res->getInt("MaCauHinh"),
-                res->getString("PhuongThucThanhToan")
+                res->getString("PhuongThucThanhToan"),
+                to_string(res->getInt("storeID"))
             );
             OrderInfoSearch.push_back(info);
         }

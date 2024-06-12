@@ -117,15 +117,15 @@ void DaiLy::NhapThongTinDaiLyCanTim()
     cout << "Nhap Thanh Pho can tim: "; cin >> ThanhPho;
     cout << "Nhap Quan can tim: "; cin >> Quan;
 
-    vector<NodeDaiLy> result = TimKiemThongTinDaiLy(DiaChi, ThanhPho, Quan);
+    vector<NodeDaiLy> result = TimKiemThongTinDaiLy( ThanhPho, Quan);
     InTTDL(result);
 }
-vector<NodeDaiLy> DaiLy::TimKiemThongTinDaiLy(string DiaChi, string ThanhPho, string Quan) 
+vector<NodeDaiLy> DaiLy::TimKiemThongTinDaiLy( string ThanhPho, string Quan) 
 {
     try {
         vector<NodeDaiLy> DaiLyInfoSearch;
         Statement* stmt = Check_DLy->createStatement();
-        string SelectData = "SELECT * FROM DaiLy WHERE Address = '" + DiaChi + "' AND City = '" + ThanhPho + "' AND distric = '" + Quan + "'";
+        string SelectData = "SELECT * FROM Store WHERE  City = '" + ThanhPho + "' AND distric = '" + Quan + "'";
         ResultSet* res = stmt->executeQuery(SelectData);
         while (res->next()) {
             NodeDaiLy info(

@@ -17,6 +17,7 @@ public:
     void XoaThongTinKhachHang(std::string);
     void InputEditUserInfo();
     void SuaThongTinKhachHang(std::string, std::string, std::string);
+    void SuaThongTinKhachHangMatTK(std::string, std::string, std::string);
     std::vector<NodeKhachHang> TimKiemThongTinKhachHang(std::string);
     std::vector<NodeKhachHang> XemTatCaThongTinKhachHang();
     void PrintTTKH(std::vector<NodeKhachHang>);

@@ -498,7 +498,7 @@ vector<NodeCauHinhXe> QuanLyXe::TimMaCauHinh(string MaXe, string MauSac, string 
         string SelectData = "Select *from CauHinhXe where MaXe = '" + MaXe + "' AND MauSac = '" + MauSac + "'AND  LoaiPin = '" + LoaiPin + "' ";
         ResultSet* res = stmt->executeQuery(SelectData);
         while (res->next()) {
-            NodeCauHinhXe Car(res->getString("MaCauHinh"), res->getString("LoaiPin"), res->getString("MauSac"), res->getString("MaXe"), res->getString("GiaPin"));
+            NodeCauHinhXe Car(to_string(res->getInt("MaCauHinh")), res->getString("LoaiPin"), res->getString("MauSac"), res->getString("MaXe"), res->getString("GiaPin"));
             CarOp.push_back(Car);
         }
         delete res;

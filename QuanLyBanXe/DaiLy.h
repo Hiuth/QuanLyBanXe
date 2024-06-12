@@ -17,7 +17,7 @@ public:
     void InputEditDaiLyInfo();
     void SuaThongTinDaiLy(std::string, std::string, std::string, std::string, std::string, std::string);
     void NhapThongTinDaiLyCanTim();
-    std::vector<NodeDaiLy> TimKiemThongTinDaiLy(std::string DiaChi, std::string ThanhPho, std::string Quan);
+    std::vector<NodeDaiLy> TimKiemThongTinDaiLy( std::string ThanhPho, std::string Quan);
     std::vector<NodeDaiLy> XemTatCaThongTinDaiLy();
     void InTTDL(std::vector<NodeDaiLy>);
     void TestAnh();
