@@ -264,6 +264,7 @@ void TaiKhoanQuanTri::XoaTaiKhoanKhachHang(string xoa)
     stmt = Check_tk->createStatement();
     check = Khach_->TimKiemThongTinKhachHang(xoa);
     sdt = check[0].GetPhoneNumber();
+    cout << "sdt" << endl;
     string SelectData = "Delete from UserAccount where UserEmail = '" + xoa + "'";
     string SelectData2 = "Delete from KhachHang where UserEmail = '" + xoa + "'";
     string SelectData3 = "Delete from LICHHENBAODUONG where UserEmail = '" + xoa + "'";

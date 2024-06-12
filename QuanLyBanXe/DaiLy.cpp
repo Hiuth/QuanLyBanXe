@@ -154,7 +154,7 @@ vector<NodeDaiLy> DaiLy::XemTatCaThongTinDaiLy()
     try {
         vector<NodeDaiLy> AllDaiLyInfo;
         Statement* stmt = Check_DLy->createStatement();
-        string SelectData = "SELECT * FROM DaiLy";
+        string SelectData = "SELECT * FROM Store";
         ResultSet* res = stmt->executeQuery(SelectData);
         while (res->next()) {
             NodeDaiLy info(
