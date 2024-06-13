@@ -114,6 +114,7 @@
     <ClCompile Include="NodeDonHang.cpp" />
     <ClCompile Include="NodeGioHang.cpp" />
     <ClCompile Include="NodeHoTro.cpp" />
+    <ClCompile Include="NodeKhuyenMai.cpp" />
     <ClCompile Include="NodeLHBaoDuong.cpp" />
     <ClCompile Include="QuanLyDVvaCSKH.cpp" />
     <ClCompile Include="QuanLyKhachHang.cpp" />
@@ -142,6 +143,7 @@
     <ClInclude Include="NodeDonHang.h" />
     <ClInclude Include="NodeGioHang.h" />
     <ClInclude Include="NodeHoTro.h" />
+    <ClInclude Include="NodeKhuyenMai.h" />
     <ClInclude Include="NodeLHBaoDuong.h" />
     <ClInclude Include="QuanLyDVvaCSKH.h" />
     <ClInclude Include="QuanLyKhachHang.h" />

@@ -94,6 +94,9 @@
     <ClCompile Include="GioHang.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="NodeKhuyenMai.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="QuanLyBanXe.h">
@@ -156,6 +159,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GioHang.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeKhuyenMai.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

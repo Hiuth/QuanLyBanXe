@@ -1,9 +1,11 @@
-#include "DaiLy.h"
+﻿#include "DaiLy.h"
 #include "KetNoi.h"
 #include "CheckDuLieu.h"
 #include <string>
 #include <iostream>
 #include <vector>
+#include <io.h>
+#include <fcntl.h>
 
 using namespace std;
 
@@ -70,11 +72,11 @@ void DaiLy::ThemThongTinDaiLy(NodeDaiLy* p)
     }
 }
 
-void DaiLy::XoaThongTinDaiLy(string MaDaiLy)
+void DaiLy::XoaThongTinDaiLy(string ThanhPho,string Quan )
 {
     try {
         Statement* stmt = Check_DLy->createStatement();
-        string DeleteQuery = "DELETE FROM DaiLy WHERE StoreID = '" + MaDaiLy + "'";
+        string DeleteQuery = "DELETE FROM Store WHERE City = '" + ThanhPho + "' and distric = '"+Quan+"'";
         stmt->execute(DeleteQuery);
         cout << "Du lieu da duoc xoa!" << endl;
         delete stmt;
@@ -94,14 +96,14 @@ void DaiLy::InputEditDaiLyInfo()
     cout << "Nhap Quan moi: "; cin >> Quan;
     cout << "Nhap Thanh Pho moi: "; cin >> ThanhPho;
 
-    DAILY->SuaThongTinDaiLy(MaDaiLy, TenDaiLy, DiaChi, SDTDaiLy, Quan, ThanhPho);
+   // DAILY->SuaThongTinDaiLy();
 }
 
-void DaiLy::SuaThongTinDaiLy(string MaDaiLy, string TenDaiLy, string DiaChi, string SDTDaiLy, string Quan, string ThanhPho)
+void DaiLy::SuaThongTinDaiLy(string ChoCanSua, string MuonDoiThanh, string Quan,string ThanhPho )
 {
     try {
         Statement* stmt = Check_DLy->createStatement();
-        string UpdateQuery = "UPDATE DaiLy SET StoreName = '" + TenDaiLy + "', City = '" + ThanhPho + "', Distric = '" + Quan + "', Address = '" + DiaChi + "', Phonenumber = '" + SDTDaiLy + "' WHERE StoreID = '" + MaDaiLy + "'";
+        string UpdateQuery = "UPDATE store SET " + ChoCanSua + " = '" + MuonDoiThanh + "' WHERE City = '" + ThanhPho + "' and distric = '"+ThanhPho+"'";
         stmt->execute(UpdateQuery);
         cout << "Du lieu da duoc cap nhat!" << endl;
         delete stmt;
@@ -186,6 +188,96 @@ void DaiLy::InTTDL(vector<NodeDaiLy> daiLyList)
         cout << "So Dien Thoai: " << daiLy.LaySDTDaiLy() << endl;
         cout << "Quan: " << daiLy.LayQuan() << endl;
         cout << "Thanh Pho: " << daiLy.LayThanhPho() << endl;
+    }
+}
+
+void DaiLy::ThemThongTinKhuyenMai(NodeKhuyenMai* p)
+{
+    try {
+        Statement* stmt;
+        stmt = Check_DLy->createStatement();
+        string TenBang = "KhuyenMai";
+        string KiemTra = "show tables like'" + TenBang + "'";
+        ResultSet* result = stmt->executeQuery(KiemTra);
+        if (result->next() == true) {
+            string NoiDung = p->LayNoiDung();
+            string UpdateTableAccount = "insert into KhuyenMai(NoiDung) Values ('" + NoiDung + "');";
+            stmt->execute(UpdateTableAccount);
+            cout << "Du lieu da duoc cap nhat!" << endl;
+        }
+        else {
+            cout << "Vui long kiem tra lai du lieu. " << endl;
+        }
+
+        delete result;
+        delete stmt;
+        delete p;
+    }
+    catch (sql::SQLException& e) {
+        cerr << "SQL Error: " << e.what() << std::endl;
+    }
+}
+
+void DaiLy::XoaThongTinKhuyenMai(string KM)
+{
+    try {
+        Statement* stmt = Check_DLy->createStatement();
+        string DeleteQuery = "DELETE FROM KhuyenMai WHERE MaKM = '" + KM + "'";
+        stmt->execute(DeleteQuery);
+        cout << "Du lieu da duoc xoa!" << endl;
+        delete stmt;
+    }
+    catch (sql::SQLException& e) {
+        cerr << "SQL Error: " << e.what() << std::endl;
+    }
+}
+
+void DaiLy::SuaThongTinKhuyenMai(string ChoCanSua, string MuonDoiThanh, string MaKhuyenMai)
+{
+    try {
+        Statement* stmt = Check_DLy->createStatement();
+        string UpdateQuery = "UPDATE KhuyenMai SET " + ChoCanSua + " = '" + MuonDoiThanh + "' WHERE MaKM = '"+ MaKhuyenMai +"'";
+        stmt->execute(UpdateQuery);
+        cout << "Du lieu da duoc cap nhat!" << endl;
+        delete stmt;
+    }
+    catch (sql::SQLException& e) {
+        cerr << "SQL Error: " << e.what() << std::endl;
+    }
+}
+
+vector<NodeKhuyenMai> DaiLy::TimKiemThongTinKhuyenMai(string)
+{
+
+}
+
+vector<NodeKhuyenMai> DaiLy::XemThongtinKhuyenMai()
+{
+    try {
+        vector<NodeKhuyenMai> KM;
+        Statement* stmt = Check_DLy->createStatement();
+        string SelectData = "SELECT * FROM KhuyenMai";
+        ResultSet* res = stmt->executeQuery(SelectData);
+        while (res->next()) {
+            NodeKhuyenMai info(
+                to_string(res->getInt("MaKM")),
+                res->getString("NoiDung")
+            );
+            KM.push_back(info);
+        }
+        delete stmt;
+        delete res;
+        return KM;
+    }
+    catch (sql::SQLException& e) {
+        cerr << "SQL Error: " << e.what() << std::endl;
+    }
+}
+
+void DaiLy::InThongTinKhuyenMai(vector<NodeKhuyenMai> check)
+{
+    for (int i = 0; i < check.size(); i++) {
+        cout << check[i].LayMaKM() << "\t" << check[i].LayNoiDung() << endl;
     }
 }
 
