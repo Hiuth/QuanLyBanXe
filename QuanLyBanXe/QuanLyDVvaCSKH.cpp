@@ -212,6 +212,70 @@ vector<NodeHoTro> QuanLyDVvaCSKH::XemLichSuYeuCauHoTro(string email)
     return LichSu;
 }
 
+vector<NodeDonHang> QuanLyDVvaCSKH::XemLichSuDonDatHangTheoSDT(string SDT)
+{
+    try {
+        vector<NodeDonHang> OrderInfoSearch;
+        Statement* stmt = Check_DV->createStatement();
+        string SelectData = "SELECT * FROM DonHang WHERE SDT = '" + SDT + "'";
+        ResultSet* res = stmt->executeQuery(SelectData);
+        while (res->next()) {
+            NodeDonHang info(
+                to_string(res->getInt("MaDonHang")),
+                res->getString("sdt"),
+                to_string(res->getInt("MaCauHinh")),
+                to_string(res->getInt("MaXe")),
+                res->getString("NgayDatHang"),
+                res->getString("NgayGiaoHangDuKien"),
+                static_cast<long long>(res->getDouble("TongGiaTriDonHang")),
+                res->getString("TrangThaiDonHang"),
+                res->getString("PhuongThucThanhToan"),
+                to_string(res->getInt("storeID")),
+                res->getString("UserEmail")
+            );
+            OrderInfoSearch.push_back(info);
+        }
+        delete stmt;
+        delete res;
+        return OrderInfoSearch;
+    }
+    catch (sql::SQLException& e) {
+        cerr << "SQL Error: " << e.what() << std::endl;
+    }
+}
+
+vector<NodeDonHang> QuanLyDVvaCSKH::XemLichSuDonDatHangTheoEmail(string Email)
+{
+    try {
+        vector<NodeDonHang> OrderInfoSearch;
+        Statement* stmt = Check_DV->createStatement();
+        string SelectData = "SELECT * FROM DonHang WHERE Email = '" + Email + "'";
+        ResultSet* res = stmt->executeQuery(SelectData);
+        while (res->next()) {
+            NodeDonHang info(
+                to_string(res->getInt("MaDonHang")),
+                res->getString("sdt"),
+                to_string(res->getInt("MaCauHinh")),
+                to_string(res->getInt("MaXe")),
+                res->getString("NgayDatHang"),
+                res->getString("NgayGiaoHangDuKien"),
+                static_cast<long long>(res->getDouble("TongGiaTriDonHang")),
+                res->getString("TrangThaiDonHang"),
+                res->getString("PhuongThucThanhToan"),
+                to_string(res->getInt("storeID")),
+                res->getString("UserEmail")
+            );
+            OrderInfoSearch.push_back(info);
+        }
+        delete stmt;
+        delete res;
+        return OrderInfoSearch;
+    }
+    catch (sql::SQLException& e) {
+        cerr << "SQL Error: " << e.what() << std::endl;
+    }
+}
+
 
 
 void QuanLyDVvaCSKH::SuaLichHenTheoSDT(string ChoCanSua, string MuonDoiThanh, string SDT)

@@ -173,6 +173,71 @@ vector<NodeDonHang> DonHang::XemTatCaThongTinDonHang() {
     }
 
 }
+vector<NodeDonHang> DonHang::XemLichSuDonDatHangTheoSDT(string SDT)
+{
+    try {
+        vector<NodeDonHang> OrderInfoSearch;
+        Statement* stmt = Check_DH->createStatement();
+        string SelectData = "SELECT * FROM DonHang WHERE SDT = '" + SDT + "'";
+        ResultSet* res = stmt->executeQuery(SelectData);
+        while (res->next()) {
+            NodeDonHang info(
+                to_string(res->getInt("MaDonHang")),
+                res->getString("sdt"),
+                to_string(res->getInt("MaCauHinh")),
+                to_string(res->getInt("MaXe")),
+                res->getString("NgayDatHang"),
+                res->getString("NgayGiaoHangDuKien"),
+                static_cast<long long>(res->getDouble("TongGiaTriDonHang")),
+                res->getString("TrangThaiDonHang"),
+                res->getString("PhuongThucThanhToan"),
+                to_string(res->getInt("storeID")),
+                res->getString("UserEmail")
+            );
+            OrderInfoSearch.push_back(info);
+        }
+        delete stmt;
+        delete res;
+        return OrderInfoSearch;
+    }
+    catch (sql::SQLException& e) {
+        cerr << "SQL Error: " << e.what() << std::endl;
+    }
+}
+
+vector<NodeDonHang> DonHang::XemLichSuDonDatHangTheoEmail(string email)
+{
+    try {
+        vector<NodeDonHang> OrderInfoSearch;
+        Statement* stmt = Check_DH->createStatement();
+        string SelectData = "SELECT * FROM DonHang WHERE UserEmail = '" + email + "'";
+        ResultSet* res = stmt->executeQuery(SelectData);
+        while (res->next()) {
+            NodeDonHang info(
+                to_string(res->getInt("MaDonHang")),
+                res->getString("sdt"),
+                to_string(res->getInt("MaCauHinh")),
+                to_string(res->getInt("MaXe")),
+                res->getString("NgayDatHang"),
+                res->getString("NgayGiaoHangDuKien"),
+                static_cast<long long>(res->getDouble("TongGiaTriDonHang")),
+                res->getString("TrangThaiDonHang"),
+                res->getString("PhuongThucThanhToan"),
+                to_string(res->getInt("storeID")),
+                res->getString("UserEmail")
+            );
+            OrderInfoSearch.push_back(info);
+        }
+        delete stmt;
+        delete res;
+        return OrderInfoSearch;
+    }
+    catch (sql::SQLException& e) {
+        cerr << "SQL Error: " << e.what() << std::endl;
+    }
+}
+
+
 vector<NodeDonHang> DonHang::GioHang(string email)
 {
     try {
@@ -338,7 +403,6 @@ void DonHang::SuaThongTinDonHang(string Email, string MuonDoiThanh, string ChoCa
     }
     catch (sql::SQLException& e) {
         cerr << "SQL Error: " << e.what() << std::endl;
-        return vector<NodeDonHang>(); 
     }
 }
 void DonHang::InputSearchOrder() {

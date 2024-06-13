@@ -3,6 +3,7 @@
 #include"NodeLHBaoDuong.h"
 #include"NodeHoTro.h"
 #include"QuanLyXe.h"
+#include"NodeDonHang.h"
 class QuanLyDVvaCSKH
 {
 private:
@@ -26,6 +27,8 @@ public:
 	void DatLichHenBaoDuong(NodeLHBaoDuong*);
 	vector<NodeLHBaoDuong> XemLichSuBaoDuong(string);// cho nguoi dung
 	vector<NodeHoTro> XemLichSuYeuCauHoTro(string);
+	vector<NodeDonHang> XemLichSuDonDatHangTheoSDT(string);
+	vector<NodeDonHang> XemLichSuDonDatHangTheoEmail(string);
 
 	void SuaLichHenTheoSDT(string, string, string); // dành do quản trị được khách hàng yêu cầu sửa 
 	void SuaLichHenTheoEmail(string,string,string); //sửa online dành do khách hàng tự sửa

@@ -186,7 +186,7 @@ void KhachHang::SuaThongTinKhachHangMatTK(string ChoCanSua, string MuonDoiThanh,
         stmt = Check_KH->createStatement();
         string SelectData = "UPDATE KhachHang SET " + ChoCanSua + " = '" + MuonDoiThanh + "' WHERE UserEmail = '" + Email + "'";
         string SelectData2 = "UPDATE LICHHENBAODUONG SET " + ChoCanSua + " = '" + MuonDoiThanh + "' WHERE UserEmail = '" + Email + "'";
-        string SelectData3 = "UPDATE GioHang SET " + ChoCanSua + " = '" + MuonDoiThanh + "' WHERE UserEmail = '" + Email + "'";
+        string SelectData3 = "UPDATE DonHang SET " + ChoCanSua + " = '" + MuonDoiThanh + "' WHERE UserEmail = '" + Email + "'";
         string SelectData4 = "UPDATE YeuCauHoTro SET " + ChoCanSua + " = '" + MuonDoiThanh + "' WHERE UserEmail = '" + Email + "'";
         int rows_affected = stmt->executeUpdate(SelectData);
         delete stmt;

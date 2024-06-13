@@ -27,6 +27,8 @@ public:
     void SuaThongTinDonHang(string, string, string);
     vector<NodeDonHang> TimKiemThongTinDonHang(string);
     vector<NodeDonHang> XemTatCaThongTinDonHang();
+    vector<NodeDonHang> XemLichSuDonDatHangTheoSDT(string);
+    vector<NodeDonHang> XemLichSuDonDatHangTheoEmail(string);
 
     vector<NodeDonHang> GioHang(string);
 
