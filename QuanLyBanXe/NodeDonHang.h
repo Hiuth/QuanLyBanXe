@@ -16,12 +16,13 @@ private:
     string MaCauHinh;
     string PhuongThucThanhToan;
     string StoreID;
+    string Email;
     NodeDonHang* pointer;
 
 public:
 
-    NodeDonHang(string, string, string, string, string, string, long long, string, string, string);
-    NodeDonHang(string, string, string, string, string, long long, string, string, string);
+    NodeDonHang(string, string, string, string, string, string, long long, string, string, string,string);
+    NodeDonHang(string, string, string, string, string, long long, string, string, string,string);
     virtual ~NodeDonHang();
 
     string GetMaDonHang() const { return MaDonHang; }
@@ -53,6 +54,9 @@ public:
 
     string LayMaCuaHang() { return StoreID; }
     void CaiDatMaCuaHang(string val) { StoreID = val; }
+
+    string LayTaiKhoanKhachHang() { return Email; }
+    void CaiDatTaiKhoanKhachHang(string val) { Email = val; }
 
     NodeDonHang* GetPointer() const { return pointer; }
     void SetPointer(NodeDonHang* val) { pointer = val; }
