@@ -3,7 +3,6 @@
 #include "CheckDuLieu.h"
 #include <iostream>
 #include <string>
-#include"DaiLy.h"
 
 using namespace std;
 
@@ -12,9 +11,8 @@ Connection* Check_DH = Check_DonHang->CheckDatabase();
 CheckDuLieu* DL_DH = new CheckDuLieu();
 DonHang* DH = new DonHang();
 QuanLyXe* QLX = new QuanLyXe();
-DonHang* orderManager = new DonHang();
-DaiLy* Dai = new DaiLy();
 KhachHang* DL_KH = new KhachHang();
+
 DonHang::DonHang() {
     this->head = NULL;
     this->tail = NULL;
@@ -47,8 +45,8 @@ void DonHang::NhapDuLieuThongTinDonHang() {
             cin.ignore();
             cout << "Nhap thanh pho: "; getline(cin, thanhpho);
             cout << "Nhap quan: "; getline(cin, quan);
-            dl = Dai->TimKiemThongTinDaiLy(thanhpho, quan);
-            storeID = dl[0].LayMaDaiLy();
+            //dl = Dai->TimKiemThongTinDaiLy(thanhpho, quan);
+          //  storeID = dl[0].LayMaDaiLy();
             cout << "Phuong Thuc Thanh Toan: "; getline(cin, PhuongThucThanhToan);
             NodeDonHang* newDonHang = new NodeDonHang(sdt, MaCauHinh, MaXe, NgayDatHang, NgayGiaoHangDuKien, TongGiaTriDonHang, TrangThaiDonHang, PhuongThucThanhToan, storeID,email);
             ThemThongTinDonHang(newDonHang);
@@ -324,9 +322,40 @@ vector<NodeDonHang> DonHang::TimKiemThongTinDonHang(string MaDonHang)
         while (res->next()) {
             NodeDonHang info(
                 to_string(res->getInt("MaDonHang")),
-                res->getString("sdt"),
+                res->getString("SDT"),
                 to_string(res->getInt("MaCauHinh")),
-                to_string(res->getInt("MaXe")),
+                res->getString("MaXe"),
+                res->getString("NgayDatHang"),
+                res->getString("NgayGiaoHangDuKien"),
+                static_cast<long long>(res->getDouble("TongGiaTriDonHang")),
+                res->getString("TrangThaiDonHang"),
+                res->getString("PhuongThucThanhToan"),
+                to_string(res->getInt("storeID")),
+                res->getString("UserEmail")
+            );
+            OrderInfoSearch.push_back(info);
+        }
+        delete stmt;
+        delete res;
+        return OrderInfoSearch;
+    }
+    catch (sql::SQLException& e) {
+        cerr << "SQL Error: " << e.what() << std::endl;
+    }
+}
+vector<NodeDonHang> DonHang::TimKiemThongTinDonHangTheoDaiLy(string MaDaiLy)
+{
+    try {
+        vector<NodeDonHang> OrderInfoSearch;
+        Statement* stmt = Check_DH->createStatement();
+        string SelectData = "SELECT * FROM DonHang WHERE storeID = '" + MaDaiLy + "'";
+        ResultSet* res = stmt->executeQuery(SelectData);
+        while (res->next()) {
+            NodeDonHang info(
+                to_string(res->getInt("MaDonHang")),
+                res->getString("SDT"),
+                to_string(res->getInt("MaCauHinh")),
+                res->getString("MaXe"),
                 res->getString("NgayDatHang"),
                 res->getString("NgayGiaoHangDuKien"),
                 static_cast<long long>(res->getDouble("TongGiaTriDonHang")),

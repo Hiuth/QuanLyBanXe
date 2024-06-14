@@ -295,6 +295,22 @@ bool CheckDuLieu::CheckOderID(string OrderID)
     delete stmt;
 }
 
+bool CheckDuLieu::Check_OperatingStatus(string thanhpho, string quan)
+{
+    Statement* stmt;
+    stmt = Check_DL->createStatement();
+    string SelectData = "Select *from Store where City = '" + thanhpho + "' and distric = '" + quan + "'";
+    ResultSet* res = stmt->executeQuery(SelectData);
+    while (res->next()) {
+        if (res->getString("TrangThai") == "Dang Hoat Dong") {
+            return true;
+        }
+    }
+    return false;
+    delete res;
+    delete stmt;
+}
+
 bool CheckDuLieu::check_StoreID(string thanhpho, string quan)
 {
     Statement* stmt;

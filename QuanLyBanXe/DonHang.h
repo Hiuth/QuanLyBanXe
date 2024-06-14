@@ -1,10 +1,9 @@
+#pragma once
 #include <string>
 #include"NodeDonHang.h"
-#include"NodeXe.h"
 #include"NodeCauHinhXe.h"
 #include"NodeDaiLy.h"
 #include"QuanLyXe.h"
-#include"NodeKhachHang.h"
 #include"QuanLyKhachHang.h"
 using namespace std;
 
@@ -26,9 +25,9 @@ public:
     void InputSearchOrder();
     void SuaThongTinDonHang(string, string, string);
     vector<NodeDonHang> TimKiemThongTinDonHang(string);
+    vector<NodeDonHang> TimKiemThongTinDonHangTheoDaiLy(string);
     vector<NodeDonHang> XemTatCaThongTinDonHang();
-    vector<NodeDonHang> XemLichSuDonDatHangTheoSDT(string);
-    vector<NodeDonHang> XemLichSuDonDatHangTheoEmail(string);
+
 
     vector<NodeDonHang> GioHang(string);
 

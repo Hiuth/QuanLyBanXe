@@ -31,7 +31,7 @@ public:
 	bool Check_CarName(string);
 
 	bool CheckOderID(string);
-
+	bool Check_OperatingStatus(string,string);
 	bool check_StoreID(string, string);
 
 	int Count_MangerAcc();
