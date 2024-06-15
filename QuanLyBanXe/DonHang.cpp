@@ -120,27 +120,39 @@ void DonHang::Xoa()
     string donhang;
     cout << "Nhap ma don hang can xoa: "; cin >> donhang;
     if (DL_DH->CheckOderID(donhang)) {
-        DH->XoaThongTinDonHang(donhang);
+       // DH->XoaThongTinDonHang(donhang);
     }
     else {
         cout << "Vui long kiem tra lai du lieu." << endl;
     }
 
 }
-void DonHang::XoaThongTinDonHang(string email)
-{
-    Statement* stmt;
-    stmt = Check_DH->createStatement();
-    string deleteOrder = "DELETE FROM DonHang WHERE UserEmail = '" + email + "'";
-    int rows_affected = stmt->executeUpdate(deleteOrder);
-    if (rows_affected > 0) {
-        cout << "Xoa don hang thanh cong!" << endl;
+void DonHang::XoaThongTinDonHang(string email, string MaXe) {
+    try {
+        Statement* stmt = Check_DH->createStatement();
+        string Trangthai = "Chưa Hoàn Thành";
+        vector<NodeXe> xe = QLX->TimKiemThongTinXe("MaXe", MaXe);
+        if (DL_DH->Check_OderStatus(email, Trangthai, MaXe)) {
+            string deleteOrder = "DELETE FROM DonHang WHERE UserEmail = '" + email + "' AND TrangThaiDonHang = '" + Trangthai + "' AND MaXe = '" + MaXe + "'";
+            int rows_affected = stmt->executeUpdate(deleteOrder);
+            QLX->SuaThongTinXe("TonKho", to_string(stoi(xe[0].LaySoLuongTonKho()) + 1), MaXe);
+        }
+        else {
+            cout << "Không có đơn hàng nào thỏa điều kiện!!!!" << endl;
+        }
+
+        // Dọn dẹp statement
+        delete stmt;
     }
-    else {
-        cout << "Khong tim thay don hang !" << endl;
+    catch (sql::SQLException& e) {
+        cerr << " SQL error: " << e.what() << std::endl;
     }
-    delete stmt;
+    catch (std::exception& e) {
+        cerr << "SQL error: " << e.what() << std::endl;
+    }
 }
+
+
 vector<NodeDonHang> DonHang::XemTatCaThongTinDonHang() {
     try {
         vector<NodeDonHang> danhSachDonHang;

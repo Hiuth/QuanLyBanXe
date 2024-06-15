@@ -20,7 +20,7 @@ public:
     void check_TGT();
     long long TongGiaTriDonHang(string,string,string);
     void Xoa();
-    void XoaThongTinDonHang(string);
+    void XoaThongTinDonHang(string,string);
     void InputEditOrderInfo();
     void InputSearchOrder();
     void SuaThongTinDonHang(string, string, string);

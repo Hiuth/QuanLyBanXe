@@ -257,6 +257,25 @@ bool CheckDuLieu::Check_CarName(string TenXe)
     }
 }
 
+//bool CheckDuLieu::check_StockQuantity(string MaXe)
+//{
+//    try {
+//        Statement* stmt;
+//        stmt = Check_DL->createStatement();
+//        string SelectData = "SELECT MaXe = '"+MaXe+"' From XEVINFAST where TonKho > 0";
+//        ResultSet* res = stmt->executeQuery(SelectData);
+//        while (res->next()) {
+//            return true;
+//        }
+//        return false;
+//        delete res;
+//        delete stmt;
+//    }
+//    catch (sql::SQLException& e) {
+//        cerr << "SQL Error: " << e.what() << std::endl;
+//    }
+//}
+
 
 bool CheckDuLieu::CheckUserAccount(string Email, string Pass)
 {
@@ -311,6 +330,26 @@ bool CheckDuLieu::Check_OperatingStatus(string thanhpho, string quan)
     delete stmt;
 }
 
+bool CheckDuLieu::Check_OderStatus(string email, string Trangthai, string MaXe)
+{
+    try {
+        Statement* stmt;
+        stmt = Check_DL->createStatement();
+        string SelectData = "Select *from DonHang WHERE UserEmail = '" + email + "' and TrangThaiDonHang = '" + Trangthai + "' and MaXe = '" + MaXe + "'";
+        ResultSet* res = stmt->executeQuery(SelectData);
+        while (res->next()) {
+            return true;
+        }
+        return false;
+        delete res;
+        delete stmt;
+    }
+    catch (sql::SQLException& e) {
+        cerr << "SQL Error: " << e.what() << std::endl;
+    }
+
+}
+
 bool CheckDuLieu::check_StoreID(string thanhpho, string quan)
 {
     Statement* stmt;
@@ -324,6 +363,7 @@ bool CheckDuLieu::check_StoreID(string thanhpho, string quan)
     delete res;
     delete stmt;
 }
+
 
 int CheckDuLieu::Count_MangerAcc()
 {

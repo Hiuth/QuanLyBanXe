@@ -29,9 +29,10 @@ public:
 	bool Check_CarID(string);
 	bool Check_CarConfigurationID(string);
 	bool Check_CarName(string);
-
+//	bool check_StockQuantity(string);
 	bool CheckOderID(string);
 	bool Check_OperatingStatus(string,string);
+	bool Check_OderStatus(string,string,string);
 	bool check_StoreID(string, string);
 
 	int Count_MangerAcc();

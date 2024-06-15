@@ -282,7 +282,7 @@ void DaiLy::XoaThongTinKhuyenMai(string KM)
     try {
         Statement* stmt = Check_DLy->createStatement();
         string DeleteQuery = "DELETE FROM KhuyenMai WHERE MaKM = '" + KM + "'";
-        stmt->execute(DeleteQuery);
+        stmt->executeUpdate(DeleteQuery);
         cout << "Du lieu da duoc xoa!" << endl;
         delete stmt;
     }
