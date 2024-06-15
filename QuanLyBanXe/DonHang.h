@@ -34,5 +34,8 @@ public:
     long long TinhTongGiaTriGioHang(vector<NodeDonHang>);
     void PrintTTDH( vector<NodeDonHang>);
     void PrintGioHang();
+
+    void CapNhatTonKho(string);
+    bool KiemTraTonKho(string);
 };
 

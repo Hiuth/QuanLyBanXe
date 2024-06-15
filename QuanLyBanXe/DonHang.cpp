@@ -27,14 +27,15 @@ void DonHang::NhapDuLieuThongTinDonHang() {
     long long TongGiaTriDonHang;
     vector<NodeCauHinhXe> cauhinh;
     vector<NodeDaiLy> dl;
+    vector<NodeXe> xe;
     cout << "Nhap email: "; cin >> email;
+
     cin.ignore();
         cout << "Nhap So Dien Thoai: "; getline(cin, sdt);
         if (DL_DH->CheckSDT(sdt)) {
             cout << "Ngay Dat Hang: "; cin >> NgayDatHang;
             cout << "Ngay Giao Hang Du Kien: "; cin >> NgayGiaoHangDuKien;
             TrangThaiDonHang = "DangXuLy";
-            cout << "Ma Xe: "; cin >> MaXe;
             cin.ignore();
             cout << "Nhap vao mau sac: "; getline(cin, MauXe);
             cout << "Nhap vao loai pin: "; cin >> LoaiPin;
@@ -79,6 +80,7 @@ void DonHang::ThemThongTinDonHang(NodeDonHang* p) {
             string UpdateTableOder = "INSERT INTO DonHang (sdt, MaCauHinh, MaXe, NgayDatHang, NgayGiaoHangDuKien, TongGiaTriDonHang, TrangThaiDonHang, PhuongThucThanhToan,storeID,UserEmail) "
                 "VALUES ('" + sdt + "', '" + MaCauHinh + "', '" + MaXe + "', '"+NgayDatHang+ "', '" + NgayGiaoHangDuKien + "', '" +to_string(TongGiaTriDonHang)+ "', '" +TrangThaiDonHang+ "', '" + PhuongThucThanhToan + "','"+StoreID+"','"+Email+"')";
             stmt->execute(UpdateTableOder);
+            DH->CapNhatTonKho(MaXe);
             cout << "Du lieu da duoc cap nhat!" << endl;
         }
         else {
@@ -237,6 +239,28 @@ void DonHang::PrintGioHang()
         cout << check[i].GetMaDonHang() << "\t" << check[i].GetSDT() << "\t" << check[i].GetMaXe() << "\t" << check[i].GetMaCauHinh() << "\t" << check[i].GetNgayDatHang() << "\t" << check[i].GetNgayGiaoHangDuKien() << "\t" << check[i].GetTongGiaTriDonHang() << "\t" << check[i].GetPhuongThucThanhToan() << endl;
     }
     cout << "Tong Gia Tri Gio Hang: " << GiaTri << endl;
+}
+
+void DonHang::CapNhatTonKho(string MaXe)
+{
+    vector<NodeXe> xe;
+    xe = QLX->TimKiemThongTinXe("MaXe", MaXe);
+    if (stoi(xe[0].LaySoLuongTonKho()) > 0) {
+        string Sl= to_string(stoi(xe[0].LaySoLuongTonKho())-1);
+        QLX->SuaThongTinXe("TonKho", Sl, MaXe);
+    }
+}
+
+bool DonHang::KiemTraTonKho(string MaXe)
+{
+    vector<NodeXe> xe;
+    xe = QLX->TimKiemThongTinXe("MaXe", MaXe);
+    if (stoi(xe[0].LaySoLuongTonKho()) > 0) {
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 
 void DonHang::InputEditOrderInfo()
