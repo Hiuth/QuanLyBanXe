@@ -345,4 +345,62 @@ void DaiLy::CapNhatTrangThaiDaiLy()
 
 }
 
+vector<NodeThanhPho> DaiLy::XemTatCaThanhPho()
+{
+    try {
+        vector<NodeThanhPho> KM;
+        Statement* stmt = Check_DLy->createStatement();
+        string SelectData = "SELECT * FROM City";
+        ResultSet* res = stmt->executeQuery(SelectData);
+        while (res->next()) {
+            NodeThanhPho info(
+                res->getString("ThanhPho")
+            );
+            KM.push_back(info);
+        }
+        delete stmt;
+        delete res;
+        return KM;
+    }
+    catch (sql::SQLException& e) {
+        cerr << "SQL Error: " << e.what() << std::endl;
+    }
+}
+
+vector<NodeQuan> DaiLy::TimKiemQuanTheoThanhPho(string ThanhPho)
+{
+    try {
+        vector<NodeQuan> KM;
+        Statement* stmt = Check_DLy->createStatement();
+        string SelectData = "SELECT * FROM Quan where ThanhPho = '"+ThanhPho+"'";
+        ResultSet* res = stmt->executeQuery(SelectData);
+        while (res->next()) {
+            NodeQuan info(
+                res->getString("Quan")
+            );
+            KM.push_back(info);
+        }
+        delete stmt;
+        delete res;
+        return KM;
+    }
+    catch (sql::SQLException& e) {
+        cerr << "SQL Error: " << e.what() << std::endl;
+    }
+}
+
+void DaiLy::InThanhPho(vector<NodeThanhPho> check)
+{
+    for (int i = 0; i < check.size(); i++) {
+        cout << "Thanh Pho: " << check[i].LayThanhPho() << endl;
+    }
+}
+
+void DaiLy::InQuan(vector<NodeQuan> check)
+{
+    for (int i = 0; i < check.size(); i++) {
+        cout << "Quan: " << check[i].LayQuan() << endl;
+    }
+}
+
 

@@ -2,6 +2,8 @@
 #include "NodeDaiLy.h"
 #include "NodeKhuyenMai.h"
 #include"DonHang.h"
+#include"NodeThanhPho.h"
+#include"NodeQuan.h"
 #include <vector>
 #include <string>
 
@@ -34,4 +36,9 @@ public:
     void InThongTinKhuyenMai(vector<NodeKhuyenMai>);
 
     void CapNhatTrangThaiDaiLy();
+
+    vector<NodeThanhPho> XemTatCaThanhPho();
+    vector<NodeQuan> TimKiemQuanTheoThanhPho(string);
+    void InThanhPho(vector<NodeThanhPho>);
+    void InQuan(vector<NodeQuan>);
 };
