@@ -28,7 +28,7 @@ QuanLyDVvaCSKH::~QuanLyDVvaCSKH()
 void QuanLyDVvaCSKH::NhapThongTinYeuCauHoTro()
 {
     string email, sdt, mota, trangthai;
-    trangthai = "ChuaXuLy";
+    trangthai = "Đang Xử Lý";
     cout << "Nhap email: "; getline(cin, email);
     cout << "Nhap so dien thoai: "; cin >> sdt;
     cin.ignore();
@@ -67,7 +67,7 @@ void QuanLyDVvaCSKH::PhanHoiYeuCauHoTro(string email)// sửa trạng thái yêu
 {
     try {
         Statement* stmt;
-        string capnhat = "DaXuLy";
+        string capnhat = "Đã Xử Lý";
         stmt = Check_DV->createStatement();
         string SelectData = "UPDATE YeuCauHoTro SET TrangThai = '" +capnhat+ "' WHERE UserEmail = '" + email + "'";
         int rows_affected = stmt->executeUpdate(SelectData);

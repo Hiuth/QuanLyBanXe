@@ -85,11 +85,15 @@ bool CheckDuLieu::check12number(string CCCD)
 }
 
 bool CheckDuLieu::checkbirthDay(string check) { // need to fix
-    for (char c : check) {
-        if (!isdigit(c) && c != '/') {
-            return false;
-        }
-    }return true;
+    time_t t = time(0);   // get time now
+    struct tm* now = localtime(&t);
+
+    int currentYear = now->tm_year + 1900;
+    int currentMonth = now->tm_mon + 1;
+    int currentDay = now->tm_mday;
+
+
+    return true;
 }
 
 /*now->tm_year + 1900: Trong cấu trúc tm, tm_year lưu trữ số năm kể từ năm 1900. Vì vậy, để lấy năm hiện tại, chúng ta cần cộng thêm 1900.

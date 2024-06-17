@@ -26,9 +26,9 @@ public:
 	bool CheckManagerAccount(string,string); // kiểm tra đăng nhập tài khoản quản trị 
 	bool Check_DataUSer(string); // kiểm tra tài khoản đã có dữ liệu thông tin cá nhân hay chưa 
 
-	bool Check_CarID(string);
-	bool Check_CarConfigurationID(string);
-	bool Check_CarName(string);
+	bool Check_CarID(string); // kiểm tra mã xe
+	bool Check_CarConfigurationID(string); // kiểm tra mã cấu hình
+	bool Check_CarName(string); // kiểm tra tên xe
 //	bool check_StockQuantity(string);
 	bool CheckOderID(string);
 	bool Check_OperatingStatus(string,string);
