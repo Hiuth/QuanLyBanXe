@@ -27,13 +27,14 @@ QuanLyDVvaCSKH::~QuanLyDVvaCSKH()
 
 void QuanLyDVvaCSKH::NhapThongTinYeuCauHoTro()
 {
-    string email, sdt, mota, trangthai;
+    string email, sdt, mota, trangthai,loaihotro;
     trangthai = "Đang Xử Lý";
     cout << "Nhap email: "; getline(cin, email);
     cout << "Nhap so dien thoai: "; cin >> sdt;
     cin.ignore();
+    cout << "Nhap loai ho tro: "; getline(cin, loaihotro);
     cout << "Nhap mo ta: "; getline(cin, mota);
-    HoTro = new NodeHoTro(email,sdt,mota,trangthai);
+    HoTro = new NodeHoTro(email,sdt,loaihotro,mota,trangthai);
     DV_CSKH->YeuCauDichVuHoTro(HoTro);
 }
 
@@ -54,7 +55,7 @@ vector<NodeHoTro> QuanLyDVvaCSKH::XemTrangThaiYeuCauHoTro(string trangthai)
     string SelectData = "Select *from YeuCauHoTro where TrangThai = '" + trangthai + "'";
     ResultSet* res = stmt->executeQuery(SelectData);
     while (res->next()) {
-        NodeHoTro HT(res->getString("UserEmail"), res->getString("SoDienThoai"), res->getString("MoTa"), res->getString("TrangThai"));
+        NodeHoTro HT(res->getString("UserEmail"), res->getString("SoDienThoai"),res->getString("LoaiHoTro"), res->getString("MoTa"), res->getString("TrangThai"));
         HoTro.push_back(HT);
     }
     delete stmt;
@@ -93,11 +94,13 @@ void QuanLyDVvaCSKH::YeuCauDichVuHoTro(NodeHoTro* p)
             string SDT;
             string MoTa;
             string TrangThai;
+            string LoaiTrangThai;
             Email = p->LayTaiKhoanKhachHang();
             SDT = p->LaySoDienThoai();
+            LoaiTrangThai = p->LayTrangThai();
             MoTa = p->LayMoTa();
             TrangThai= p->LayTrangThai();
-            string UpdateTableAccount = "insert into YeuCauHoTro(UserEmail,SoDienThoai,MoTa,TrangThai) Values ('" + Email + "','" +SDT + "','" + MoTa + "','" + TrangThai + "');";
+            string UpdateTableAccount = "insert into YeuCauHoTro(UserEmail,SoDienThoai,LoaiTrangThai,MoTa,TrangThai) Values ('" + Email + "','" +SDT + "','"+LoaiTrangThai+"','" + MoTa + "','" + TrangThai + "');";
             stmt->execute(UpdateTableAccount);
             cout << "Du lieu da duoc cap nhat!" << endl;
         }
@@ -204,7 +207,7 @@ vector<NodeHoTro> QuanLyDVvaCSKH::XemLichSuYeuCauHoTro(string email)
     string SelectData = "Select *from YeuCauHoTro where UserEmail = '" + email + "'";
     ResultSet* res = stmt->executeQuery(SelectData);
     while (res->next()) {
-        NodeHoTro HT(res->getString("UserEmail"), res->getString("SoDienThoai"), res->getString("MoTa"), res->getString("TrangThai"));
+        NodeHoTro HT(res->getString("UserEmail"), res->getString("SoDienThoai"),res->getString("LoaiHoTro"), res->getString("MoTa"), res->getString("TrangThai"));
         LichSu.push_back(HT);
     }
     delete stmt;

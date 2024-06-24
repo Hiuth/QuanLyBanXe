@@ -38,7 +38,6 @@ public:
 	vector<NodeCauHinhXe> TimKiemCauHinh(string,string);//tìm kiếm theo nhu cầu như là theo màu sắc, loại pin.
 	vector<NodeCauHinhXe> TimMaCauHinh(string, string, string);
 
-
 	void InThongtinTimKiem(vector<NodeXe>);
 	void InThongTinTimKiemCauHinh(vector<NodeCauHinhXe>);
 
@@ -46,6 +45,7 @@ public:
 	vector<NodeXe> SapXepTheoGiaTienGiamDan(vector<NodeXe>);// theo giá tiền tăng dần hoặc giảm dần 
 	vector<NodeXe> SapXepTheoTonKhoTangDan(vector<NodeXe>);// theo tồn kho tiền tăng dần hoặc giảm dần, chỉ có quản trị được truy cập tới
 	vector<NodeXe> SapXepTheoTonKhoGiamDan(vector<NodeXe>);// theo tồn kho tiền tăng dần hoặc giảm dần, chỉ có quản trị được truy cập
+
 
 };
 

@@ -108,11 +108,9 @@
   <ItemGroup>
     <ClCompile Include="DaiLy.cpp" />
     <ClCompile Include="DonHang.cpp" />
-    <ClCompile Include="GioHang.cpp" />
     <ClCompile Include="NodeCauHinhXe.cpp" />
     <ClCompile Include="NodeDaiLy.cpp" />
     <ClCompile Include="NodeDonHang.cpp" />
-    <ClCompile Include="NodeGioHang.cpp" />
     <ClCompile Include="NodeHoTro.cpp" />
     <ClCompile Include="NodeKhuyenMai.cpp" />
     <ClCompile Include="NodeLHBaoDuong.cpp" />
@@ -138,12 +136,10 @@
     <ClInclude Include="CheckDuLieu.h" />
     <ClInclude Include="DaiLy.h" />
     <ClInclude Include="DonHang.h" />
-    <ClInclude Include="GioHang.h" />
     <ClInclude Include="KetNoi.h" />
     <ClInclude Include="NodeCauHinhXe.h" />
     <ClInclude Include="NodeDaiLy.h" />
     <ClInclude Include="NodeDonHang.h" />
-    <ClInclude Include="NodeGioHang.h" />
     <ClInclude Include="NodeHoTro.h" />
     <ClInclude Include="NodeKhuyenMai.h" />
     <ClInclude Include="NodeLHBaoDuong.h" />

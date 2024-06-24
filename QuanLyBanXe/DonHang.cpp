@@ -3,6 +3,7 @@
 #include "CheckDuLieu.h"
 #include <iostream>
 #include <string>
+#include<algorithm>
 
 using namespace std;
 
@@ -221,6 +222,62 @@ vector<NodeDonHang> DonHang::GioHang(string email)
         cerr << "SQL Error: " << e.what() << std::endl;
     }
 }
+
+//vector<NodeXe> DonHang::XeBanChayNhat()
+//{
+//    vector<NodeDonHang> Don = DH->XemTatCaThongTinDonHang();
+//    vector<NodeXe> Xe = QLX->XemThongTinXe();
+//    vector<NodeXe> Xemoi;
+//    vector<int> a;
+//    int vitri = 0, count = 0, max = 0, ktra = 0; // vị trí lưu vị trí vector của thằng bán chạy nhất
+//    for(int i = 0; i < Xe.size(); i++) {
+//        for (int j = 0; j < Don.size(); j++) {
+//            if (Xe[i].LayMaXe() == Don[j].GetMaXe()) {
+//                count++;
+//            }
+//        }
+//        a[i] = count++;
+//        count = 0;
+//    }
+//    auto SLN = max_element(a.begin(), a.end());
+//    int solon = *SLN;
+//    for (int i = 0; i < a.size(); i++) {
+//        if (a[i] == solon) {
+//            Xemoi.push_back(Xe[i]);
+//        }
+//    }
+//    return Xemoi;
+//}
+
+
+vector<NodeXe> DonHang::XeBanChayNhat() {
+    vector<NodeDonHang> Don = DH->XemTatCaThongTinDonHang();
+    vector<NodeXe> Xe = QLX->XemThongTinXe();
+    vector<NodeXe> Xemoi;
+    vector<int> a(Xe.size(), 0); // Khởi tạo vector a với kích thước bằng với số lượng xe và giá trị ban đầu là 0
+
+    for (int i = 0; i < Xe.size(); i++) {
+        int count = 0; // Đặt count về 0 ở đầu mỗi vòng lặp
+        for (int j = 0; j < Don.size(); j++) {
+            if (Xe[i].LayMaXe() == Don[j].GetMaXe()) {
+                count++;
+            }
+        }
+        a[i] = count; // Gán count cho a[i]
+    }
+
+    auto SLN = std::max_element(a.begin(), a.end()); // Tìm phần tử lớn nhất trong vector a
+    int solon = *SLN; // Lấy giá trị của phần tử lớn nhất
+
+    for (int i = 0; i < a.size(); i++) {
+        if (a[i] == solon) {
+            Xemoi.push_back(Xe[i]); // Thêm xe vào vector Xemoi
+        }
+    }
+
+    return Xemoi;
+}
+
 
 long long DonHang::TinhTongGiaTriGioHang(vector<NodeDonHang> check)
 {

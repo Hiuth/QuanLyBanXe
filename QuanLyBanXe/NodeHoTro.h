@@ -8,9 +8,10 @@ private:
 	string sdt;
 	string mota;
 	string trangthai;
+	string loaihotro;
 	NodeHoTro* pointer;
 public:
-	NodeHoTro(string, string, string, string);
+	NodeHoTro(string, string, string, string,string);
 	virtual ~NodeHoTro();
 
 	string LayTaiKhoanKhachHang() { return UserEmail; }
@@ -24,6 +25,9 @@ public:
 
 	string LayTrangThai() { return trangthai; }
 	void CaiDatTrangThai(string val) { trangthai = val; }
+
+	string LayLoaiHoTro() { return loaihotro; }
+	void CaiDatLoaiHoTro(string val) { loaihotro = val; }
 
 	NodeHoTro* GetPointer() { return pointer; }
 	void SetPointer(NodeHoTro* val) { pointer = val; }
