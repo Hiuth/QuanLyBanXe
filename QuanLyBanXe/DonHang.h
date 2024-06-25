@@ -28,7 +28,8 @@ public:
     vector<NodeDonHang> TimKiemThongTinDonHangTheoDaiLy(string);
     vector<NodeDonHang> XemTatCaThongTinDonHang();
 
-
+    long long TinhTongDoanhThuDonHangTheoThang(string,string);
+    long long TinhTongDoanhThuDonHangTheoNam(string);
     vector<NodeDonHang> GioHang(string);
     vector<NodeXe> XeBanChayNhat();
     long long TinhTongGiaTriGioHang(vector<NodeDonHang>);

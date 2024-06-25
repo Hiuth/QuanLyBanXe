@@ -187,6 +187,32 @@ vector<NodeDonHang> DonHang::XemTatCaThongTinDonHang() {
 
 }
 
+long long DonHang::TinhTongDoanhThuDonHangTheoThang(string month, string year)
+{
+    long long Tonggiatri = 0;
+    Statement* stmt;
+    stmt = Check_DH->createStatement();
+    string query = "SELECT SUM(TongGiaTriDonHang) AS total_value  FROM DonHang WHERE MONTH(STR_TO_DATE(NgayGiaoHangDuKien, '%d/%m/%Y')) = '"+month+"' AND YEAR(STR_TO_DATE(NgayGiaoHangDuKien, '%d/%m/%Y')) = '" +year + "' AND TrangThaiDonHang = 'Đã Hoàn Thành'; ";
+    ResultSet* res = stmt->executeQuery(query);
+    if (res->next()) {
+        Tonggiatri = res->getInt64("total_value");
+    }
+    return Tonggiatri;
+}
+
+long long DonHang::TinhTongDoanhThuDonHangTheoNam(string year)
+{
+    long long Tonggiatri = 0;
+    Statement* stmt;
+    stmt = Check_DH->createStatement();
+    string query = "SELECT SUM(TongGiaTriDonHang) AS total_value  FROM DonHang WHERE YEAR(STR_TO_DATE(NgayGiaoHangDuKien, '%d/%m/%Y')) = '" + year + "' AND TrangThaiDonHang = 'Đã Hoàn Thành'; ";
+    ResultSet* res = stmt->executeQuery(query);
+    if (res->next()) {
+        Tonggiatri = res->getInt64("total_value");
+    }
+    return Tonggiatri;
+}
+
 
 
 
