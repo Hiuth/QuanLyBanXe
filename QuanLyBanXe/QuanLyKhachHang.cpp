@@ -5,20 +5,20 @@
 KetNoi* Check_KhachHang = new KetNoi();
 Connection* Check_KH = Check_KhachHang->CheckDatabase();
 NodeKhachHang* N_KH;
-KhachHang* KHACH = new KhachHang();
+QuanLyKhachHang* KHACH = new QuanLyKhachHang();
 CheckDuLieu* DL_KH = new CheckDuLieu();
-KhachHang::KhachHang()
+QuanLyKhachHang::QuanLyKhachHang()
 
 {
     this->head = NULL;
     this->tail = NULL;
 }
 
-KhachHang::~KhachHang()
+QuanLyKhachHang::~QuanLyKhachHang()
 {
     // Giải phóng bộ nhớ nếu cần thiết
 }
-void KhachHang::NhapDuLieuThongTinKhachHang()
+void QuanLyKhachHang::NhapDuLieuThongTinKhachHang()
 {
     string TenKhachHang, SinhNhat, CCCD, DiaChi, GioiTinh, SoDienThoai, Email;
     cout << "Nhap Email tai khoan can them thong tin khach hang: "; cin >> Email;
@@ -69,7 +69,7 @@ void KhachHang::NhapDuLieuThongTinKhachHang()
         cout << "Tai khoan khong ton tai! Vui long kiem tra lai." << endl;
     }
 }
-void KhachHang::ThemThongTinKhachHang(NodeKhachHang* p)
+void QuanLyKhachHang::ThemThongTinKhachHang(NodeKhachHang* p)
 {
     try {
 
@@ -111,7 +111,7 @@ void KhachHang::ThemThongTinKhachHang(NodeKhachHang* p)
     }
 }
 
-void KhachHang::InputEditUserInfo()
+void QuanLyKhachHang::InputEditUserInfo()
 {
     int chon;
     string TenKhachHang, SinhNhat, CCCD, DiaChi, GioiTinh, SoDienThoai, Email, SoDienThoaiMoi;
@@ -167,7 +167,7 @@ void KhachHang::InputEditUserInfo()
         cout << "Tai Khoan khong ton tai! Vui long kiem tra lai! " << endl;
     }
 }
-void KhachHang::SuaThongTinKhachHang(string ChoCanSua, string MuonDoiThanh, string SDT)
+void QuanLyKhachHang::SuaThongTinKhachHang(string ChoCanSua, string MuonDoiThanh, string SDT)
 {
     try {
         Statement* stmt;
@@ -179,7 +179,7 @@ void KhachHang::SuaThongTinKhachHang(string ChoCanSua, string MuonDoiThanh, stri
         cerr << "SQL Error: " << e.what() << std::endl;
     }
 }
-void KhachHang::SuaThongTinKhachHangMatTK(string ChoCanSua, string MuonDoiThanh, string Email)
+void QuanLyKhachHang::SuaThongTinKhachHangMatTK(string ChoCanSua, string MuonDoiThanh, string Email)
 {
     try {
         Statement* stmt;
@@ -195,7 +195,7 @@ void KhachHang::SuaThongTinKhachHangMatTK(string ChoCanSua, string MuonDoiThanh,
         cerr << "SQL Error: " << e.what() << std::endl;
     }
 }
-vector<NodeKhachHang> KhachHang::TimKiemThongTinKhachHang(string SDT)
+vector<NodeKhachHang> QuanLyKhachHang::TimKiemThongTinKhachHang(string SDT)
 {
     try {
         vector<NodeKhachHang> UserInfoSearch;
@@ -215,7 +215,7 @@ vector<NodeKhachHang> KhachHang::TimKiemThongTinKhachHang(string SDT)
         cerr << "SQL Error: " << e.what() << std::endl;
     }
 }
-vector<NodeKhachHang> KhachHang::XemTatCaThongTinKhachHang()
+vector<NodeKhachHang> QuanLyKhachHang::XemTatCaThongTinKhachHang()
 {
     vector<NodeKhachHang> UserInfo;
     Statement* stmt;
@@ -230,7 +230,7 @@ vector<NodeKhachHang> KhachHang::XemTatCaThongTinKhachHang()
     delete res;
     return UserInfo;
 }
-void KhachHang::PrintTTKH(vector<NodeKhachHang>check)
+void QuanLyKhachHang::PrintTTKH(vector<NodeKhachHang>check)
 {
     for (int i = 0; i < check.size(); i++) {
         cout << check[i].GetName() << "\t" << check[i].GetSex() << "\t" << check[i].GetBirthday() << "\t" << check[i].GetPhoneNumber() << "\t" << check[i].GetIDCard() << "\t" << check[i].GetEmail() << "\t" << check[i].GetAddress() << endl;

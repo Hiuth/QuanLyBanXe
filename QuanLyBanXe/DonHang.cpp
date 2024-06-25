@@ -12,7 +12,7 @@ Connection* Check_DH = Check_DonHang->CheckDatabase();
 CheckDuLieu* DL_DH = new CheckDuLieu();
 DonHang* DH = new DonHang();
 QuanLyXe* QLX = new QuanLyXe();
-KhachHang* DL_KH = new KhachHang();
+QuanLyKhachHang* DL_KH = new QuanLyKhachHang();
 
 DonHang::DonHang() {
     this->head = NULL;

@@ -3,15 +3,15 @@
 #include <vector>
 #include <string>
 using namespace std;
-class KhachHang
+class QuanLyKhachHang
 {
 private:
     NodeKhachHang* head;
     NodeKhachHang* tail;
 
 public:
-    KhachHang();
-    virtual ~KhachHang();
+    QuanLyKhachHang();
+    virtual ~QuanLyKhachHang();
     void NhapDuLieuThongTinKhachHang();
     void ThemThongTinKhachHang(NodeKhachHang*);
     void XoaThongTinKhachHang(std::string);

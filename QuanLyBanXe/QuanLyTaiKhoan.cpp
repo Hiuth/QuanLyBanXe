@@ -7,7 +7,7 @@ Connection* Check_tk = Check_TaiKhoanQuanTri->CheckDatabase();
 NodeTaiKhoanQuanTri* TKQT;
 NodeTaiKhoanKhachHang* TKKH;
 NodeKhachHang* KH;
-KhachHang* Khach_ = new KhachHang();
+QuanLyKhachHang* Khach_ = new QuanLyKhachHang();
 TaiKhoanQuanTri* QT = new TaiKhoanQuanTri();
 CheckDuLieu* DL = new CheckDuLieu();
 
